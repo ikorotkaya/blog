@@ -1,0 +1,16 @@
+---
+import Head from '../components/Head.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<html lang="en">
+  <head>
+    <Head title = "Irina's Blog" />
+  </head>
+    <body>
+      <Navbar />
+      <slot />
+      <Footer />
+    </body>
+</html>
