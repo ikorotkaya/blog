@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Irina's Blog";
+const description = "Irina's Blog is a place where she shares her thoughts on web development, design, and life in general.";
 ---
 
-<BaseLayout>
+<BaseLayout description={description} title={title}>
 	<p>Here is an example</p>
 </BaseLayout>
