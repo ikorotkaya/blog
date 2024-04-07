@@ -8,8 +8,10 @@ const description = "A collection of posts";
 ---
 
 <BaseLayout title={title} description={description}>
-  <h1>{title}:</h1>
-  <ul>
-    {allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
-  </ul>
+  <div>
+    <p>{title}:</p>
+      <ul>
+        {allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+      </ul>
+  </div>
 </BaseLayout>
