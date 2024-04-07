@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Create Astro Project'
-pubDate: 2022-07-01
-description: 'create-astro-project'
+pubDate: 2024-03-25
+description: 'Create simple astro project with navbar.'
 author: 'Irina'
 # image:
 #     url: 'https://docs.astro.build/assets/full-logo-light.png'
@@ -95,7 +95,7 @@ Create a `Navbar.astro` component inside `/src/components/`. If the `/src/compon
 		<a href="/" class="text-2xl hover:text-gray-500">Korotkaya</a>
 	</div>
 	<div>
-		<a href="/posts/" class="text-lg hover:text-gray-500 ml-2">Posts</a>
+		<a href="/blog/" class="text-lg hover:text-gray-500 ml-2">Blog</a>
 		<a href="/about/" class="text-lg hover:text-gray-500 ml-2">About</a>
 	</div>
 </nav>
