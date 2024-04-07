@@ -1,4 +1,18 @@
-<body>
-  <a href="/">Home</a>
-  <h1>About Me</h1>
-</body>
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "About me";
+const description = "Some info about myself";
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="flex flex-col mx-10">
+		<div class="flex flex-row gap-10 mx-36">
+			<img src="/public/irina_image.svg" alt="Irina" class="rounded-full w-40 h-40 mx-auto mt-10" />
+			<div>
+				<h1 class="text-4xl font-bold text-center mt-10">Hey, I'm Irina! 👋🏼</h1>
+				<div class="text-center mt-5">I'm a Full Stack Engineer with a background in Design and Architecture, based in Berlin. Currently working as a Software Engineer at Buena.</div>
+			</div>
+		</div>
+	</div>
+</BaseLayout>
