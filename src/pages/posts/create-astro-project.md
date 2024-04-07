@@ -7,7 +7,7 @@ author: 'Irina'
 # image:
 #     url: 'https://docs.astro.build/assets/full-logo-light.png'
 #     alt: 'The full Astro logo.'
-tags: ["astro", "blogging", "learning in public"]
+tags: ["blogging", "astro"]
 ---
 
 # Step-by-Step Guide to Create a Simple Astro Project with Navbar
