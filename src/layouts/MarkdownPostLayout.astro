@@ -1,10 +1,11 @@
 ---
 import BaseLayout from './BaseLayout.astro'
+import Tag from '../components/Tag.astro'
 const { frontmatter, description, title } = Astro.props
 ---
 
 <BaseLayout description={description} title={title}>
-  <article class="prose prose-stone flex flex-col max-w-full">
+  <article class="flex flex-col max-w-full">
     <header>
       <h2>{frontmatter.title}</h2>
       <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
@@ -12,16 +13,10 @@ const { frontmatter, description, title } = Astro.props
     <main>
       <slot />
     </main>
-    <div class="flex flex-wrap flex-col">
-      <div>Tags:</div>
+    <div class="flex flex-wrap flex-col mb-12">
+      <div class="mb-4">Tags:</div>
       <div class="flex gap-2">
-        {
-          frontmatter.tags.map((tag: string) => (
-            <p class="border border-gray-400 hover:bg-slate-300 rounded-md p-1 text-base">
-              <a href={`/tags/${tag}`}>{tag}</a>
-            </p>
-          ))
-        }
+        {frontmatter.tags.map((tag: string) => <Tag key={tag} tag={tag} />)}
       </div>
     </div>
   </article>
