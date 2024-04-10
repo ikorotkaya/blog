@@ -2,7 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'from HTTPS to SSH'
 pubDate: 2024-03-20
-tags: ["git", "github", "ssh", "https"]
+tags: ['git', 'github', 'ssh', 'https']
 ---
 
 ## How to switch from HTTPS to SSH for GitHub access: A simple guide
@@ -28,6 +28,7 @@ Switching from HTTPS to SSH may sound daunting, but it's actually quite simple. 
    Press `Enter` to accept the default file location and passphrase, or set one for added security. This will create two files: a private key (usually `id_rsa`) and a public key (`id_rsa.pub`).
 
 2. **Add your SSH key to GitHub**: Next you need to add your public key to your GitHub account. Open the `id_rsa.pub` file with a text editor and copy its contents:
+
    - Go to GitHub and click on your profile picture, then click on `Settings`.
    - In the sidebar, click `SSH and GPG Keys`, then `New SSH Key`.
    - Paste your public key into the field, give it a meaningful title, and click `Add SSH key`.

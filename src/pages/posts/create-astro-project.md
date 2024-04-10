@@ -2,7 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Create Astro Project'
 pubDate: 2024-03-25
-tags: ["astro"]
+tags: ['astro']
 ---
 
 This guide will walk you through creating a simple Astro project with a home page.
@@ -36,12 +36,15 @@ Add basic HTML structure to your `index.astro` file:
 ---
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Home</title>
   </head>
   <body>
@@ -56,11 +59,11 @@ At the root of your project, create an `astro.config.mjs` file to configure your
 
 ```js
 // astro.config.mjs
-import { defineConfig } from "astro/config";
+import { defineConfig } from 'astro/config'
 
 export default defineConfig({
   // Configuration for your app
-});
+})
 ```
 
 ## Step 5: Add Favicon
@@ -82,15 +85,17 @@ Create a `Navbar.astro` component inside `/src/components/`. If the `/src/compon
 ```html
 {/* src/components/Navbar.astro */}
 <nav
-	class="flex text-center justify-between items-center py-6 px-6 shadow-lg w-full"
+  class="flex text-center justify-between items-center py-6 px-6 shadow-lg w-full"
 >
-	<div>
-		<a href="/" class="text-2xl hover:text-gray-500">Korotkaya</a>
-	</div>
-	<div>
-		<a href="/blog/" class="text-lg hover:text-gray-500 ml-2">Blog</a>
-		<a href="/about/" class="text-lg hover:text-gray-500 ml-2">About</a>
-	</div>
+  <div>
+    <a href="/" class="text-2xl hover:text-gray-500">Korotkaya</a>
+  </div>
+  <div>
+    <a href="/blog/" class="text-lg hover:text-gray-500 ml-2">Blog</a>
+    <a href="/about/" class="text-lg hover:text-gray-500 ml-2"
+      >About</a
+    >
+  </div>
 </nav>
 ```
 
@@ -103,12 +108,15 @@ Import and use the `Navbar` component in your `index.astro` page by modifying th
 import Navbar from '../components/Navbar.astro';
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Home</title>
   </head>
   <body>

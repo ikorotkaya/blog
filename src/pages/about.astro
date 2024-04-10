@@ -1,19 +1,22 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from '../layouts/BaseLayout.astro'
 
-const title = "About me";
-const description = "Some info about myself";
+const title = 'About me'
+const description = 'Some info about myself'
 ---
 
 <BaseLayout title={title} description={description}>
   <div class="flex flex-col items-center mx-48">
-		<img 
-			src="/public/irina_image.svg" 
-			alt="Irina" 
-			class="rounded-full w-40 h-40 mx-auto mb-10" />
-		<div class="mb-8">Hey, I'm Irina! 👋🏼</div>
-		<div>I'm a Full Stack Engineer with a background in Design and Architecture, 
-			based in Berlin. Currently working as a Software Engineer at Buena.
-		</div>
-	</div>
+    <img
+      src="/public/irina_image.svg"
+      alt="Irina"
+      class="rounded-full w-40 h-40 mx-auto mb-10"
+    />
+    <div class="mb-8">Hey, I'm Irina! 👋🏼</div>
+    <div>
+      I'm a Full Stack Engineer with a background in Design and
+      Architecture, based in Berlin. Currently working as a Software
+      Engineer at Buena.
+    </div>
+  </div>
 </BaseLayout>
