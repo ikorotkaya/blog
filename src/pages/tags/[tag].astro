@@ -25,7 +25,7 @@ const { posts } = Astro.props
 ---
 
 <BaseLayout title={tag} description={tag}>
-  <p>Posts tagged with {tag}:</p>
+  <h2 class="mb-4">Posts tagged with #{tag}:</h2>
   <ul>
     {
       posts.map((post) => (

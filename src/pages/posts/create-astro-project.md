@@ -88,13 +88,11 @@ Create a `Navbar.astro` component inside `/src/components/`. If the `/src/compon
   class="flex text-center justify-between items-center py-6 px-6 shadow-lg w-full"
 >
   <div>
-    <a href="/" class="text-2xl hover:text-gray-500">Korotkaya</a>
+    <a href="/" class="text-2xl hover:text-stone-500">Korotkaya</a>
   </div>
   <div>
-    <a href="/blog/" class="text-lg hover:text-gray-500 ml-2">Blog</a>
-    <a href="/about/" class="text-lg hover:text-gray-500 ml-2"
-      >About</a
-    >
+    <a href="/blog/" class="text-lg hover:text-stone-500 ml-2">Blog</a>
+    <a href="/about/" class="text-lg hover:text-stone-500 ml-2">About</a>
   </div>
 </nav>
 ```

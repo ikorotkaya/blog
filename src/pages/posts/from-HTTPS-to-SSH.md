@@ -1,11 +1,9 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: 'from HTTPS to SSH'
+title: 'Switch from HTTPS to SSH for GitHub Access'
 pubDate: 2024-03-20
 tags: ['git', 'github', 'ssh', 'https']
 ---
-
-## How to switch from HTTPS to SSH for GitHub access: A simple guide
 
 If you're a GitHub user, you've likely experienced the hassle of repeatedly entering your username and password to access your repositories. This process becomes even more tedious if you use two-factor authentication, requiring you to generate a personal access token for every push or pull operation. However, there's a simpler and more secure method to work with GitHub: using SSH.
 
