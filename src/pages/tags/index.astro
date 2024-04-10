@@ -11,7 +11,9 @@ const description = 'Astro Base Layout example.';
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="flex flex-wrap gap-4">
-    {tags.map((tag) => <Tag key={tag} tag={tag} />)}
+  <div class="flex-grow">
+    <div class="flex flex-wrap gap-4 flex-row">
+      {tags.map((tag) => <Tag key={tag} tag={tag} />)}
+    </div>
   </div>
 </BaseLayout>
