@@ -4,7 +4,7 @@ const { frontmatter, description, title } = Astro.props;
 ---
 
 <BaseLayout description={description} title={title}>
-  <article class="flex flex-col gap-16">
+  <article class="prose prose-stone flex flex-col gap-16">
     <header>
       <h2>Title: {frontmatter.title}</h2>
       <p>Date: {frontmatter.pubDate.toString().slice(0,10)}</p>
