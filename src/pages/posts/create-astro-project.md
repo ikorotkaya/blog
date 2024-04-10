@@ -2,17 +2,10 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Create Astro Project'
 pubDate: 2024-03-25
-description: 'Create simple astro project with navbar.'
-author: 'Irina'
-# image:
-#     url: 'https://docs.astro.build/assets/full-logo-light.png'
-#     alt: 'The full Astro logo.'
-tags: ["blogging", "astro"]
+tags: ["astro"]
 ---
 
-# Step-by-Step Guide to Create a Simple Astro Project with Navbar
-
-This guide will walk you through creating a simple Astro project with a home page that includes a navigation bar (navbar).
+This guide will walk you through creating a simple Astro project with a home page.
 
 ## Step 1: Create Astro Project
 

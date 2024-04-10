@@ -1,13 +1,8 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'from HTTPS to SSH'
-pubDate: 2022-07-01
-description: 'switch from HTTPS to SSH for GitHub access'
-author: 'Irina'
-# image:
-#     url: 'https://docs.astro.build/assets/full-logo-light.png'
-#     alt: 'The full Astro logo.'
-tags: ["blogging"]
+pubDate: 2024-03-20
+tags: ["git", "github", "ssh", "https"]
 ---
 
 ## How to switch from HTTPS to SSH for GitHub access: A simple guide
