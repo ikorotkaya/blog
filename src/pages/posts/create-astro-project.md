@@ -59,11 +59,11 @@ At the root of your project, create an `astro.config.mjs` file to configure your
 
 ```js
 // astro.config.mjs
-import { defineConfig } from 'astro/config'
+import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   // Configuration for your app
-})
+});
 ```
 
 ## Step 5: Add Favicon
@@ -91,8 +91,12 @@ Create a `Navbar.astro` component inside `/src/components/`. If the `/src/compon
     <a href="/" class="text-2xl hover:text-stone-500">Korotkaya</a>
   </div>
   <div>
-    <a href="/blog/" class="text-lg hover:text-stone-500 ml-2">Blog</a>
-    <a href="/about/" class="text-lg hover:text-stone-500 ml-2">About</a>
+    <a href="/blog/" class="text-lg hover:text-stone-500 ml-2"
+      >Blog</a
+    >
+    <a href="/about/" class="text-lg hover:text-stone-500 ml-2"
+      >About</a
+    >
   </div>
 </nav>
 ```

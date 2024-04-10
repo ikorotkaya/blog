@@ -1,7 +1,7 @@
 ---
-import BaseLayout from './BaseLayout.astro'
-import Tag from '../components/Tag.astro'
-const { frontmatter, description, title } = Astro.props
+import BaseLayout from './BaseLayout.astro';
+import Tag from '../components/Tag.astro';
+const { frontmatter, description, title } = Astro.props;
 ---
 
 <BaseLayout description={description} title={title}>
@@ -16,7 +16,11 @@ const { frontmatter, description, title } = Astro.props
     <div class="flex flex-wrap flex-col mb-12">
       <div class="mb-4">Tags:</div>
       <div class="flex gap-2">
-        {frontmatter.tags.map((tag: string) => <Tag key={tag} tag={tag} />)}
+        {
+          frontmatter.tags.map((tag: string) => (
+            <Tag key={tag} tag={tag} />
+          ))
+        }
       </div>
     </div>
   </article>

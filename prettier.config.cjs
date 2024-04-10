@@ -1,7 +1,13 @@
 /** @type {import("prettier").Config} */
 module.exports = {
-  pluginSearchDirs: [__dirname],
-  plugins: [require.resolve('prettier-plugin-astro')],
+  semi: true,
+  singleQuote: true,
+  printWidth: 70,
+  tabWidth: 2,
+  useTabs: false,
+  trailingComma: 'none',
+  bracketSpacing: true,
+  plugins: ['prettier-plugin-astro'],
   overrides: [
     {
       files: '*.astro',
@@ -10,4 +16,4 @@ module.exports = {
       }
     }
   ]
-}
+};
