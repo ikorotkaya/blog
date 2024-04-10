@@ -1,0 +1,17 @@
+---
+const links = [
+  { href: '/blog/', label: 'Blog' },
+  { href: '/tags/', label: 'Tags' },
+  { href: '/about/', label: 'About' }
+];
+---
+
+<div class="flex flex-row gap-4">
+  {
+    links.map((link) => (
+      <a href={link.href} class="hover:text-stone-500 no-underline">
+        {link.label}
+      </a>
+    ))
+  }
+</div>
