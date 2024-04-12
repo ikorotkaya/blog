@@ -9,7 +9,7 @@ const description = 'A collection of posts';
 
 <BaseLayout title={title} description={description}>
   <div class="flex-grow">
-    <h6>{title}:</h6>
+    <div class="mb-4 text-lg">{title}:</div>
     <ul>
       {
         allPosts.map((post) => (

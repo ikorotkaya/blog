@@ -40,8 +40,12 @@ const { description, title }: Props = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
-  <body class="prose mx-auto max-w-[728px] min-h-screen flex flex-col">
-    <Header />
+  <body
+    class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"
+  >
+    <div class="border-b border-tapa-100 mb-8">
+      <Header />
+    </div>
     <slot />
     <Footer />
   </body>
