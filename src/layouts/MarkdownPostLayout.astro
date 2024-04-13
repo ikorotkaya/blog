@@ -7,14 +7,14 @@ const { frontmatter, description, title } = Astro.props;
 <BaseLayout description={description} title={title}>
   <article class="flex flex-col max-w-full flex-grow">
     <header>
-      <h2>{frontmatter.title}</h2>
+      <h1>{frontmatter.title}</h1>
       <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
     </header>
     <main>
       <slot />
     </main>
     <div class="flex flex-wrap flex-col mb-12">
-      <div class="mb-4">Tags:</div>
+      <h2 class="mb-4">Tags:</h2>
       <div class="flex gap-2">
         {
           frontmatter.tags.map((tag: string) => (

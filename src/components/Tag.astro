@@ -3,9 +3,6 @@ const { tag } = Astro.props;
 ---
 
 <>
-  <a
-    href={`/tags/${tag}`}
-    class="no-underline bg-tapa-50 hover:bg-smalt-300 rounded-md px-2 py-1"
-    >#{tag}</a
-  >
+  <a href={`/tags/${tag}`}>{tag}</a>
 </>
+

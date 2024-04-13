@@ -7,34 +7,41 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Literata', 'sans-serif']
-      }
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.neutral'),
+            a: {
+              color: theme('colors.neutral'),
+              '&:hover': {
+                color: theme('colors.smalt')
+              }
+            },
+            p: {
+              color: theme('colors.neutral'),
+              fontSize: '1.1em',
+            },
+            h1: {
+              color: theme('colors.neutral'),
+              fontSize: '1.9em',
+              fontWeight: '400',
+            },
+            h2: {
+              color: theme('colors.neutral'),
+              fontSize: '1.3em',
+              fontWeight: '400',
+            },
+          }
+        }
+      })
     },
     colors: {
-      smalt: {
-        50: '#f3f7f8',
-        100: '#e1ebec',
-        200: '#c6d9db',
-        300: '#9fbec1',
-        400: '#709ba0',
-        500: '#568186',
-        600: '#496b71',
-        700: '#40595e',
-        800: '#3a4c50',
-        900: '#344245',
-        950: '#1f2a2d'
-      },
+      smalt: '#889EAA',
+      neutral: '#171717',
       tapa: {
         50: '#f4f3f2',
-        100: '#e2e1df',
-        200: '#c7c4c1',
-        300: '#a7a29d',
-        400: '#8e8781',
-        500: '#78716c',
-        600: '#6d6561',
-        700: '#585250',
-        800: '#4d4846',
-        900: '#443f3f',
-        950: '#262322'
+        100: '#e2e1df'
       }
     }
   },
