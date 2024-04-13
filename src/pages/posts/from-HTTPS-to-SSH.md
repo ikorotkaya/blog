@@ -7,13 +7,13 @@ tags: ['git', 'github', 'ssh', 'https']
 
 If you're a GitHub user, you've likely experienced the hassle of repeatedly entering your username and password to access your repositories. This process becomes even more tedious if you use two-factor authentication, requiring you to generate a personal access token for every push or pull operation. However, there's a simpler and more secure method to work with GitHub: using SSH.
 
-### Understanding HTTPS and SSH
+## Understanding HTTPS and SSH
 
 **HTTPS** is the method you're probably using right now. It's straightforward and secure, requiring your username and password for access. However, it can be tedious, especially with the extra step of using a personal access token for those with two-factor authentication.
 
 **SSH** is a protocol that allows secure network operations using a pair of keys: one private and one public. This method doesn't require you to enter your username and password each time you interact with your repositories, making your workflow smoother and more secure.
 
-### Making the switch
+## Making the switch
 
 Switching from HTTPS to SSH may sound daunting, but it's actually quite simple. Here's how to do it in a few steps:
 
