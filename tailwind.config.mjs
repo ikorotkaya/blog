@@ -14,6 +14,7 @@ export default {
             color: theme('colors.neutral'),
             a: {
               color: theme('colors.neutral'),
+              fontSize: '1.1em',
               '&:hover': {
                 color: theme('colors.smalt')
               }
