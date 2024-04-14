@@ -1,6 +1,13 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Tag from '../components/Tag.astro';
+import { format } from 'date-fns';
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return format(date, 'dd MMMM yyyy');
+};
+
 const { frontmatter, description, title } = Astro.props;
 ---
 
@@ -8,7 +15,7 @@ const { frontmatter, description, title } = Astro.props;
   <article class="flex flex-col max-w-full flex-grow">
     <header>
       <h1>{frontmatter.title}</h1>
-      <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
+      <p>{formatDate(frontmatter.pubDate)}</p>
     </header>
     <main>
       <slot />

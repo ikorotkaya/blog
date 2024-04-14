@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Event Propagation in JavaScript'
-pubDate: 2024-04-14
+pubDate: '2024 04 14'
 tags: ['frontend', 'HTML', 'DOM', 'event']
 ---
 ## Event Propagation is the blanket term for both *event bubbling* and *event capturing*.

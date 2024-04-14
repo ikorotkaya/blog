@@ -12,9 +12,15 @@ const description = 'A collection of thoughts and learnings.';
     <h2>{title}:</h2>
     <ul>
       {
-        allPosts.map((post) => (
-          <BlogPost url={post.url} title={post.frontmatter.title} />
-        ))
+        allPosts
+          .sort(
+            (a, b) =>
+              new Date(b.frontmatter.pubDate).getTime() -
+              new Date(a.frontmatter.pubDate).getTime()
+          )
+          .map((post) => (
+            <BlogPost url={post.url} title={post.frontmatter.title} />
+          ))
       }
     </ul>
   </div>

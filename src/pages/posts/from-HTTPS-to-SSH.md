@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Switch from HTTPS to SSH for GitHub Access'
-pubDate: 2024-03-20
+pubDate: '2024-03-20'
 tags: ['git', 'github', 'ssh', 'https']
 ---
 
