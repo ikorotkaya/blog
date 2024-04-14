@@ -21,7 +21,7 @@ export default {
             },
             p: {
               color: theme('colors.neutral'),
-              fontSize: '1.1em',
+              fontSize: '1em',
             },
             h1: {
               color: theme('colors.neutral'),
@@ -30,7 +30,7 @@ export default {
             },
             h2: {
               color: theme('colors.neutral'),
-              fontSize: '1.3em',
+              fontSize: '1.5em',
               fontWeight: '400',
             },
           }
@@ -39,7 +39,7 @@ export default {
     },
     colors: {
       smalt: '#889EAA',
-      neutral: '#171717',
+      neutral: '#212121',
       tapa: {
         50: '#f4f3f2',
         100: '#e2e1df'
