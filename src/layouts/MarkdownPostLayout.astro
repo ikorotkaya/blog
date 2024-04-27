@@ -21,7 +21,7 @@ const { frontmatter, description, title } = Astro.props;
       <slot />
     </main>
     <div class="flex flex-wrap flex-col mb-12">
-      <h2 class="mb-4">Tags:</h2>
+      <h2 class="mb-4">Topics:</h2>
       <div class="flex gap-2">
         {
           frontmatter.tags.map((tag: string) => (

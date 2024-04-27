@@ -14,25 +14,24 @@ export default {
             color: theme('colors.neutral'),
             a: {
               color: theme('colors.neutral'),
-              fontSize: '1.1em',
               '&:hover': {
                 color: theme('colors.smalt')
               }
             },
             p: {
               color: theme('colors.neutral'),
-              fontSize: '1em',
+              fontSize: '1em'
             },
             h1: {
               color: theme('colors.neutral'),
               fontSize: '1.9em',
-              fontWeight: '400',
+              fontWeight: '400'
             },
             h2: {
               color: theme('colors.neutral'),
               fontSize: '1.5em',
-              fontWeight: '400',
-            },
+              fontWeight: '400'
+            }
           }
         }
       })
