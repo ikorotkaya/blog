@@ -2,7 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Create Astro Project'
 pubDate: '2024 03 25'
-tags: ['astro']
+tags: ['astro', 'blog']
 ---
 
 This guide will walk you through creating a simple Astro project with a home page.
