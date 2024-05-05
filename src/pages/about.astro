@@ -6,11 +6,6 @@ const description = 'Some info about myself';
 
 const contactOptions = [
   {
-    link: 'mailto:irina@korotkaya.com',
-    icon: '/public/gmail.webp',
-    alt: 'Gmail'
-  },
-  {
     link: 'https://www.linkedin.com/in/irinakorotkaya/',
     icon: '/public/linkedin.webp',
     alt: 'LinkedIn'
@@ -19,6 +14,11 @@ const contactOptions = [
     link: 'https://github.com/ikorotkaya',
     icon: '/public/github.webp',
     alt: 'GitHub'
+  },
+  {
+    link: 'mailto:irina@korotkaya.com',
+    icon: '/public/gmail.webp',
+    alt: 'Gmail'
   }
 ];
 ---
@@ -40,7 +40,7 @@ const contactOptions = [
       {
         contactOptions.map((option) => (
           <a href={option.link} target="_blank">
-            <img src={option.icon} alt={option.alt} class="h-3" />
+            <img src={option.icon} alt={option.alt} class="h-4" />
           </a>
         ))
       }
