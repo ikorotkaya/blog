@@ -7,5 +7,5 @@ export default defineConfig({
   integrations: [tailwind({})],
   output: 'static',
   outDir: './docs',
-  base: '/personal-blog/'
+  base: '/blog/'
 });
