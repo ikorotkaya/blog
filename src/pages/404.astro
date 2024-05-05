@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Page not found';
+const description = 'Page not found.';
+---
+
+<BaseLayout description={description} title={title}>
+  <div class="text-center flex-grow">
+    <p>404</p>
+    <h1>Page not found</h1>
+    <div>
+      <a href="/blog/">Go back home</a>
+    </div>
+  </div>
+</BaseLayout>
