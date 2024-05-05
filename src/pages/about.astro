@@ -3,6 +3,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = 'About me';
 const description = 'Some info about myself';
+
+const contactOptions = [
+  {
+    link: 'mailto:irina@korotkaya.com',
+    icon: '/public/gmail.webp',
+    alt: 'Gmail'
+  },
+  {
+    link: 'https://www.linkedin.com/in/irinakorotkaya/',
+    icon: '/public/linkedin.webp',
+    alt: 'LinkedIn'
+  },
+  {
+    link: 'https://github.com/ikorotkaya',
+    icon: '/public/github.webp',
+    alt: 'GitHub'
+  }
+];
 ---
 
 <BaseLayout title={title} description={description}>
@@ -17,6 +35,15 @@ const description = 'Some info about myself';
           class="no-underline text-smalt hover:text-neutral">Buena</a
         >. Before that, I was working as an Architect for 7 years.
       </p>
+    </div>
+    <div class="not-prose flex gap-4 items-center mt-3">
+      {
+        contactOptions.map((option) => (
+          <a href={option.link} target="_blank">
+            <img src={option.icon} alt={option.alt} class="h-3" />
+          </a>
+        ))
+      }
     </div>
   </div>
 </BaseLayout>
