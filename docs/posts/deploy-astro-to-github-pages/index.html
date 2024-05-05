@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.TYKvSD3S.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Deploying Astro to GitHub Pages</h1> <p>01 May 2024</p> </header> <main> <h2 id="step-1-configure-your-astro-project">Step 1: Configure Your Astro Project</h2>
+<p>The first thing you need to do is adapt your project configuration to GitHub Pages:</p>
+<ol>
+<li><strong>Disable Jekyll Processing</strong>:
+Create a <code>.nojekyll</code> file in the root of your project and any relevant subdirectories such as <code>/public/</code> and <code>/public/astro/</code>. This tells GitHub Pages to ignore Jekyll, preventing conflicts with your static files.</li>
+<li><strong>Adjust Astro Configuration</strong>:
+When preparing your Astro project for deployment on GitHub Pages, it’s important to configure the <code>astro.config.mjs</code> file.This configuration prepares your project for static site generation and ensures proper deployment on GitHub Pages, especially regarding how URLs and links are handled:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">// Example configuration for Astro</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#B392F0"> defineConfig</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  integrations: [</span><span style="color:#B392F0">tailwind</span><span style="color:#E1E4E8">({})], </span><span style="color:#6A737D">// Include any integrations specific to your needs</span></span>
+<span class="line"><span style="color:#E1E4E8">  output: </span><span style="color:#9ECBFF">'static'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  outDir: </span><span style="color:#9ECBFF">'./docs'</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// GitHub uses this directory to serve your site</span></span>
+<span class="line"><span style="color:#E1E4E8">  base: </span><span style="color:#9ECBFF">'/project-name/'</span><span style="color:#6A737D"> // Replace 'project-name' with your actual project name</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span></code></pre>
+<p>Key Configuration: The Base URL</p>
+<ul>
+<li><strong>Why Set a Base URL</strong>:
+GitHub Pages by default serves your project from a URL structured as <code>&#x3C;username>.github.io</code>. If your repository name is not simply <code>&#x3C;username>.github.io</code> but includes additional paths (like <code>&#x3C;username>.github.io/project-name/</code>), you need to specify this in the base URL setting in your Astro configuration. This base URL helps Astro understand the root directory of your site relative to the custom URL path.</li>
+<li><strong>Impact on Links</strong>:
+By setting the <code>base</code> property to <code>/project-name/</code>, you ensure that all internal links are prefixed with this base. This is essential because, without the correct base setting, your site’s navigation and resource links will not point to the correct paths, leading to broken pages and missing assets when viewed on GitHub Pages.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">// Example of how to set up internal links with a base URL</span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"/project-name/about"</span><span style="color:#E1E4E8">>About&#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">> </span><span style="color:#6A737D">// "Project-name" should be equal to base url in `astro.config.mjs`.</span></span>
+<span class="line"></span></code></pre>
+<h2 id="step-2-build-your-astro-project">Step 2: Build Your Astro Project</h2>
+<p>Once your project is configured, build the static files:</p>
+<ol start="3">
+<li><strong>Build the project:</strong> Run <code>npm run build</code> in your terminal to compile the project into the <code>/docs</code> folder. Verify that all files are correctly placed and structured within the <code>/docs</code> directory, ensuring they’re ready for deployment.</li>
+</ol>
+<h2 id="step-3-deploy-your-astro-project-to-github-pages">Step 3: Deploy Your Astro Project to GitHub Pages</h2>
+<p>The last steps are: to push your project to GitHub and set up GitHub Pages:</p>
+<ol start="4">
+<li><strong>Push project to GitHub</strong>: Commit all changes, especially the new <code>/docs</code> directory. Push these changes to your GitHub main branch.</li>
+<li><strong>Set up GitHub Pages</strong>: In your GitHub repository settings, find the “Pages” section. Under “Build and deployment”, choose “Deploy from a branch” and set it to deploy from the <code>main</code> branch, specifically from the <code>/docs</code> folder. Save your changes and wait a few minutes for GitHub to publish your site.</li>
+</ol>
+<p>These steps help you easily set up your project on <a href="https://pages.github.com/">Github Pages</a>. Share your site with everyone!</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/astro">astro</a><a href="/blog/topics/blog">blog</a><a href="/blog/topics/github-pages">github-pages</a><a href="/blog/topics/deployment">deployment</a><a href="/blog/topics/static-site">static-site</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
