@@ -5,7 +5,7 @@ pubDate: '2024 03 25'
 tags: ['astro', 'blog']
 ---
 
-This guide will walk you through creating a simple Astro project with a home page.
+This guide will walk you through creating a simple Astro project with a home page and a navigation bar.
 
 ## Step 1: Create Astro Project
 
@@ -33,7 +33,8 @@ touch index.astro
 Add basic HTML structure to your `index.astro` file:
 
 ```html
----
+--- 
+// This is the frontmatter section where you can import components and define metadata. See Step 8 for an example of importing a NavBar component.
 ---
 
 <!doctype html>
@@ -48,7 +49,7 @@ Add basic HTML structure to your `index.astro` file:
     <title>Home</title>
   </head>
   <body>
-    <h1>Welcome to Astro</h1>
+    <h1>Your first Blog!</h1>
   </body>
 </html>
 ```
@@ -62,13 +63,13 @@ At the root of your project, create an `astro.config.mjs` file to configure your
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  // Configuration for your app
+  // Configuration for your app, you can add plugins, optimize, and more
 });
 ```
 
 ## Step 5: Add Favicon
 
-Create a `/public` folder at the root of your project and add a `favicon.ico` file to this folder. This favicon will be displayed in the browser tab.
+Create a `/public` folder at the root of your project and add a `favicon.ico` file to this folder. This favicon will be displayed in the browser tab. You can create it using a favicon generator like [favicon.io](https://favicon.io/).
 
 ## Step 6: Integrate Tailwind CSS
 
@@ -84,21 +85,18 @@ Create a `Navbar.astro` component inside `/src/components/`. If the `/src/compon
 
 ```html
 {/* src/components/Navbar.astro */}
-<nav
-  class="flex text-center justify-between items-center py-6 px-6 shadow-lg w-full"
->
-  <div>
-    <a href="/" class="text-2xl hover:text-stone-500">Korotkaya</a>
-  </div>
-  <div>
-    <a href="/blog/" class="text-lg hover:text-stone-500 ml-2"
-      >Blog</a
-    >
-    <a href="/about/" class="text-lg hover:text-stone-500 ml-2"
-      >About</a
-    >
-  </div>
-</nav>
+
+<div class="flex flex-row gap-4">
+  <a href="/blog/posts/" class="hover:text-smalt no-underline">
+    Posts
+  </a>
+  <a href="/blog/topics/" class="hover:text-smalt no-underline">
+    Topics
+  </a>
+  <a href="/blog/about/" class="hover:text-smalt no-underline">
+    About
+  </a>
+</div>
 ```
 
 ## Step 8: Use Navbar in Index Page
@@ -128,5 +126,3 @@ import Navbar from '../components/Navbar.astro';
 ```
 
 Now, when you run `npm run dev` and go to `localhost:3000`, you should see your index page with the Navbar at the top.
-
-Congratulations! You've just created a simple Astro project with a home page and a simple navigation bar.
