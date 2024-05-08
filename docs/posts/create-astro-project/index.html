@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.EORflO3R.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Create Astro Project</h1> <p>25 March 2024</p> </header> <main> <p>This guide will walk you through creating a simple Astro project with a home page.</p>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.BblX_rPj.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Create Astro Project</h1> <p>25 March 2024</p> </header> <main> <p>This guide will walk you through creating a simple Astro project with a home page and a navigation bar.</p>
 <h2 id="step-1-create-astro-project">Step 1: Create Astro Project</h2>
 <p>First, you need to create a new Astro project and run it. Open your terminal and run the following commands:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> create</span><span style="color:#9ECBFF"> astro@latest</span></span>
@@ -13,7 +13,8 @@
 <span class="line"><span style="color:#B392F0">touch</span><span style="color:#9ECBFF"> index.astro</span></span>
 <span class="line"></span></code></pre>
 <p>Add basic HTML structure to your <code>index.astro</code> file:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">---</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">--- </span></span>
+<span class="line"><span style="color:#E1E4E8">// This is the frontmatter section where you can import components and define metadata. See Step 8 for an example of importing a NavBar component.</span></span>
 <span class="line"><span style="color:#E1E4E8">---</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#E1E4E8">&#x3C;!</span><span style="color:#85E89D">doctype</span><span style="color:#B392F0"> html</span><span style="color:#E1E4E8">></span></span>
@@ -28,7 +29,7 @@
 <span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">title</span><span style="color:#E1E4E8">>Home&#x3C;/</span><span style="color:#85E89D">title</span><span style="color:#E1E4E8">></span></span>
 <span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">head</span><span style="color:#E1E4E8">></span></span>
 <span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">body</span><span style="color:#E1E4E8">></span></span>
-<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>Welcome to Astro&#x3C;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>Your first Blog!&#x3C;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">></span></span>
 <span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">body</span><span style="color:#E1E4E8">></span></span>
 <span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">html</span><span style="color:#E1E4E8">></span></span>
 <span class="line"></span></code></pre>
@@ -38,11 +39,11 @@
 <span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { defineConfig } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'astro/config'</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#B392F0"> defineConfig</span><span style="color:#E1E4E8">({</span></span>
-<span class="line"><span style="color:#6A737D">  // Configuration for your app</span></span>
+<span class="line"><span style="color:#6A737D">  // Configuration for your app, you can add plugins, optimize, and more</span></span>
 <span class="line"><span style="color:#E1E4E8">});</span></span>
 <span class="line"></span></code></pre>
 <h2 id="step-5-add-favicon">Step 5: Add Favicon</h2>
-<p>Create a <code>/public</code> folder at the root of your project and add a <code>favicon.ico</code> file to this folder. This favicon will be displayed in the browser tab.</p>
+<p>Create a <code>/public</code> folder at the root of your project and add a <code>favicon.ico</code> file to this folder. This favicon will be displayed in the browser tab. You can create it using a favicon generator like <a href="https://favicon.io/">favicon.io</a>.</p>
 <h2 id="step-6-integrate-tailwind-css">Step 6: Integrate Tailwind CSS</h2>
 <p>Astro supports Tailwind CSS out of the box. To add Tailwind to your project, run:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">npx</span><span style="color:#9ECBFF"> astro</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> tailwind</span></span>
@@ -50,21 +51,18 @@
 <h2 id="step-7-create-tailwind-navbar-component">Step 7: Create Tailwind Navbar Component</h2>
 <p>Create a <code>Navbar.astro</code> component inside <code>/src/components/</code>. If the <code>/src/components/</code> directory doesn’t exist, create it. Use the following code for your navbar component:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">{/* src/components/Navbar.astro */}</span></span>
-<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">nav</span></span>
-<span class="line"><span style="color:#B392F0">  class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"flex text-center justify-between items-center py-6 px-6 shadow-lg w-full"</span></span>
-<span class="line"><span style="color:#E1E4E8">></span></span>
-<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
-<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"/"</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"text-2xl hover:text-stone-500"</span><span style="color:#E1E4E8">>Korotkaya&#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
-<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
-<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
-<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"/blog/"</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"text-lg hover:text-stone-500 ml-2"</span></span>
-<span class="line"><span style="color:#E1E4E8">      >Blog&#x3C;/</span><span style="color:#85E89D">a</span></span>
-<span class="line"><span style="color:#E1E4E8">    ></span></span>
-<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"/about/"</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"text-lg hover:text-stone-500 ml-2"</span></span>
-<span class="line"><span style="color:#E1E4E8">      >About&#x3C;/</span><span style="color:#85E89D">a</span></span>
-<span class="line"><span style="color:#E1E4E8">    ></span></span>
-<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
-<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">nav</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"flex flex-row gap-4"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"/blog/posts/"</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"hover:text-smalt no-underline"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    Posts</span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"/blog/topics/"</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"hover:text-smalt no-underline"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    Topics</span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"/blog/about/"</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"hover:text-smalt no-underline"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    About</span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
 <span class="line"></span></code></pre>
 <h2 id="step-8-use-navbar-in-index-page">Step 8: Use Navbar in Index Page</h2>
 <p>Import and use the <code>Navbar</code> component in your <code>index.astro</code> page by modifying the file as follows:</p>
@@ -88,7 +86,6 @@
 <span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">body</span><span style="color:#E1E4E8">></span></span>
 <span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">html</span><span style="color:#E1E4E8">></span></span>
 <span class="line"></span></code></pre>
-<p>Now, when you run <code>npm run dev</code> and go to <code>localhost:3000</code>, you should see your index page with the Navbar at the top.</p>
-<p>Congratulations! You’ve just created a simple Astro project with a home page and a simple navigation bar.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/astro">astro</a><a href="/blog/topics/blog">blog</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+<p>Now, when you run <code>npm run dev</code> and go to <code>localhost:3000</code>, you should see your index page with the Navbar at the top.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/astro">astro</a><a href="/blog/topics/blog">blog</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
 Made with ♥︎ by Irina Korotkaya
 </div> </body></html>

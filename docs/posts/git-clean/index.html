@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.BblX_rPj.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Understanding the `git clean` Command</h1> <p>02 May 2024</p> </header> <main> <p>The <code>git clean</code> command helps to keep the project folder tidy by removing files and directories that Git isn’t tracking.</p>
+<p><strong>What are untracked files?</strong>
+Untracked files are those that exist in your directory but haven’t been added to Git’s record of tracked files. Essentially, Git doesn’t know about these files yet.</p>
+<p><strong>Options in <code>git clean</code>:</strong></p>
+<ul>
+<li><strong><code>-f</code> or <code>--force</code>:</strong> This is required to actually delete files because Git wants to prevent accidental deletions of important data.</li>
+<li><strong><code>-d</code>:</strong> Use this if you need to remove untracked directories in addition to untracked files.</li>
+<li><strong><code>-n</code>:</strong> This stands for “dry run.” It shows you what would be deleted if you were to run the command without this option. It’s a safe way to ensure you don’t delete something you might need.</li>
+</ul>
+<p><strong>How to use it:</strong></p>
+<ul>
+<li><strong><code>git clean -n</code>:</strong> Run this to see what would be deleted. It’s like a preview.</li>
+<li><strong><code>git clean -f -d</code>:</strong> When you confirm that all files and directories shown can be deleted, use this command to actually remove all untracked files and directories.</li>
+</ul>
+<p>The options above allow you to manage deletions carefully, ensuring that you only remove what you intend to and check everything before you make it final.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/git">git</a><a href="/blog/topics/git-clean">git-clean</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
