@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.CSI6htF5.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Handling Non-Null Assertions in TypeScript</h1> <p>14 April 2024</p> </header> <main> <p>When coding in TypeScript, you might come across an exclamation mark (<code>!</code>) following a variable name. This is known as the “non-null assertion operator”. It’s used to tell TypeScript that even though a variable could be <code>null</code> or <code>undefined</code> according to its type, you are certain it is neither.</p>
+<p><strong>Context and How It’s Used</strong></p>
+<p>Here’s an example to explain how this works:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">sorting</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">.nulls </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> initialSorting.nulls;</span></span>
+<span class="line"></span></code></pre>
+<p>In this line, <code>sorting</code> might be <code>null</code> or <code>undefined</code> as per its defined type, but you as the developer know that it has already been assigned a value elsewhere in your code. By using <code>!</code>, you’re effectively telling TypeScript:</p>
+<ul>
+<li>“I’ve checked this already. <code>sorting</code> is definitely not <code>null</code> or <code>undefined</code>.”</li>
+</ul>
+<p><strong>Caution in Using the Non-Null Assertion Operator</strong></p>
+<p>Although the non-null assertion operator can be very useful, it should be used carefully:</p>
+<ul>
+<li>It overrides TypeScript’s strict null checks. If your assumption is incorrect, it could cause errors at runtime.</li>
+<li>Relying heavily on <code>!</code> might suggest that your types or your approach to managing nullability could be improved. Think of it as a quick fix that could potentially mask deeper design issues in your code.</li>
+</ul>
+<p><strong>Best Practices</strong></p>
+<ul>
+<li>Ensure there’s a logical reason supported by your code’s flow that guarantees the variable is not null or undefined before using <code>!</code>.</li>
+<li>Always document why it’s safe to use the non-null assertion in that instance, either through inline comments or in your project documentation.</li>
+</ul>
+<p>Using <code>!</code> places the burden on you to uphold the safety guarantees usually provided by TypeScript’s type system. While it’s a potent tool, it should be used judiciously and backed by solid reasoning.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/frontend">frontend</a><a href="/blog/topics/typescript">typescript</a><a href="/blog/topics/types">types</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
