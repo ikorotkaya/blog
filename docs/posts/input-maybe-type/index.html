@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.CSI6htF5.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>InputMaybe&lt;T&gt;</h1> <p>04 May 2024</p> </header> <main> <p>When working with TypeScript, specifically in a project that involve GraphQL, I encountered the type <code>InputMaybe&#x3C;T></code>. Here’s a explanation of how it works and why it’s useful.</p>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.CSI6htF5.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>InputMaybe&lt;T&gt; type</h1> <p>04 May 2024</p> </header> <main> <p>When working with TypeScript, specifically in a project that involve GraphQL, I encountered the type <code>InputMaybe&#x3C;T></code>. Here’s a explanation of how it works and why it’s useful.</p>
 <p><strong>What is <code>InputMaybe&#x3C;T></code>?</strong></p>
 <p><code>InputMaybe&#x3C;T></code> defines how nullable and optional fields are managed. It’s defined as follows:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> type</span><span style="color:#B392F0"> InputMaybe</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Maybe</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>;</span></span>
@@ -8,21 +8,21 @@
 <span class="line"></span></code></pre>
 <p>This setup allows a variable of type <code>InputMaybe&#x3C;T></code> to accept three kinds of values:</p>
 <ol>
-<li>A value of type <code>T</code> (the specific expected type, like <code>SortNulls</code>).</li>
+<li>a value of type <code>T</code> (the specific expected type, like <code>SortNulls</code>).</li>
 <li><code>null</code> (allows explicitly setting the value to null).</li>
 <li><code>undefined</code> (the value can be omitted).</li>
 </ol>
 <p><strong>Why use <code>InputMaybe&#x3C;SortNulls></code> instead of <code>SortNulls</code>?</strong></p>
 <p>In TypeScript, marking a property as optional with <code>?</code> means the property can be either its specific type or <code>undefined</code>. It does not include <code>null</code> by default. Here’s what that looks like:</p>
 <ul>
-<li><code>nulls?: SortNulls</code> — Here, <code>nulls</code> can be either a <code>SortNulls</code> value or <code>undefined</code>. It cannot be <code>null</code>.</li>
-<li><code>nulls?: InputMaybe&#x3C;SortNulls></code> — In this case, <code>nulls</code> can be a <code>SortNulls</code> value, <code>null</code>, or <code>undefined</code>.</li>
+<li><code>nulls?: SortNulls</code> — here, <code>nulls</code> can be either a <code>SortNulls</code> value or <code>undefined</code>. It cannot be <code>null</code>.</li>
+<li><code>nulls?: InputMaybe&#x3C;SortNulls></code> — in this case, <code>nulls</code> can be a <code>SortNulls</code> value, <code>null</code>, or <code>undefined</code>.</li>
 </ul>
 <p><strong>Practical Implication in Usage</strong></p>
 <p>In settings like GraphQL APIs, distinguishing between <code>null</code> and <code>undefined</code> is crucial:</p>
 <ul>
-<li><strong><code>undefined</code> might signal “do not alter this field”,</strong></li>
-<li><strong><code>null</code> could indicate “clear any value this field might have”.</strong></li>
+<li><code>undefined</code> might signal “do not alter this field”,</li>
+<li><code>null</code> could indicate “clear any value this field might have”.</li>
 </ul>
 <p>This distinction matters because it affects how mutations or queries behave—whether to update a field, clear it, or leave it unchanged. Using <code>InputMaybe</code> ensures that the API’s TypeScript types are aligned with its operational logic.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/frontend">frontend</a><a href="/blog/topics/typescript">typescript</a><a href="/blog/topics/types">types</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
 Made with ♥︎ by Irina Korotkaya

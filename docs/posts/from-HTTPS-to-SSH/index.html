@@ -1,25 +1,25 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.CSI6htF5.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Switch from HTTPS to SSH for GitHub Access</h1> <p>20 March 2024</p> </header> <main> <p>I needed to switch working computers and wanted to access my GitHub repositories without repeatedly entering my username and password. I found that using SSH keys was the best way to do this. And here are the steps to switch from HTTPS to SSH for GitHub access.</p>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.CSI6htF5.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Switch from HTTPS to SSH for GitHub access</h1> <p>20 March 2024</p> </header> <main> <p>I needed to switch working computers and wanted to access my GitHub repositories without repeatedly entering my username and password. I found that using SSH keys was the best way to do this. And here are the steps to switch from HTTPS to SSH for GitHub access.</p>
 <h2 id="what-are-https-and-ssh">What are HTTPS and SSH?</h2>
 <p><strong>HTTPS</strong> is likely what you’re using at first. It’s a secure protocol requiring regular credential checks. It uses your username and password to access repositories. But if you have two-factor authentication, it demands an extra step of using a personal access token.</p>
 <p><strong>SSH</strong> is a secure protocol using cryptographic keys for authentication. It uses a pair of keys — one private and one public — to secure network operations without needing to input your credentials every time.</p>
 <h2 id="steps-to-switch-to-ssh">Steps to Switch to SSH</h2>
 <ol>
 <li>
-<p><strong>Generate an SSH key pair</strong>: First, you need to create a new SSH key pair on your computer. Open your terminal or command prompt and type:</p>
+<p><strong>Generate an SSH key pair</strong>: first, you need to create a new SSH key pair on your computer. Open your terminal or command prompt and type:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">ssh-keygen</span></span>
 <span class="line"></span></code></pre>
 <p>Follow the prompts to choose a file location and passphrase. This generates two files: your private key (<code>id_rsa</code>) and public key (<code>id_rsa.pub</code>).</p>
 </li>
 <li>
-<p><strong>Add your SSH key to GitHub</strong>: Open the <code>id_rsa.pub</code> file with a text editor and copy its contents:</p>
+<p><strong>Add your SSH key to GitHub</strong>: open the <code>id_rsa.pub</code> file with a text editor and copy its contents:</p>
 <ul>
-<li>Go to GitHub and click on your profile picture, then click on <code>Settings</code>.</li>
-<li>In the sidebar, click <code>SSH and GPG Keys</code>, then <code>New SSH Key</code>.</li>
-<li>Paste your public key into the field, give it a title, and click <code>Add SSH key</code>.</li>
+<li>go to GitHub and click on your profile picture, then click on <code>Settings</code>.</li>
+<li>in the sidebar, click <code>SSH and GPG Keys</code>, then <code>New SSH Key</code>.</li>
+<li>paste your public key into the field, give it a title, and click <code>Add SSH key</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Change Your Repository’s Remote URL</strong>: Change your repository’s remote URL from HTTPS to SSH. In your terminal, go to your repository directory and run:</p>
+<p><strong>Change Your Repository’s Remote URL</strong>: change your repository’s remote URL from HTTPS to SSH. In your terminal, go to your repository directory and run:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> remote</span><span style="color:#9ECBFF"> set-url</span><span style="color:#9ECBFF"> origin</span><span style="color:#9ECBFF"> git@github.com:username/repository.git</span></span>
 <span class="line"></span></code></pre>
 <p>Replace <code>username</code> and <code>repository.git</code> with your GitHub username and repository name respectively.</p>

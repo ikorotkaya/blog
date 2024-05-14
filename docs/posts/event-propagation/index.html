@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.CSI6htF5.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Event Propagation in JavaScript</h1> <p>14 April 2024</p> </header> <main> <h2 id="event-propagation-is-the-blanket-term-for-both-event-bubbling-and-event-capturing">Event Propagation is the blanket term for both <em>event bubbling</em> and <em>event capturing</em>.</h2>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.CSI6htF5.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Event propagation in JavaScript</h1> <p>14 April 2024</p> </header> <main> <h2 id="event-propagation-is-the-blanket-term-for-both-event-bubbling-and-event-capturing">Event Propagation is the blanket term for both event bubbling and event capturing.</h2>
 <p>The propagation is <strong>bidirectional</strong>, from the window to the event target and back:</p>
 <ul>
 <li>event bubbling triggers on the deepest target element, and then bubbles up to its parents.</li>
@@ -9,8 +9,8 @@
 <li>
 <p><strong>Capture phase</strong> (from window to event target parent):</p>
 <ul>
-<li>During this phase, only listeners designated as capturers are triggered. These are registered with <code>true</code> as the third parameter in <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a>. Without specifying this parameter, it defaults to <code>false</code>, meaning the listener will not capture:
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">el.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, listener, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">)</span></span>
+<li>during this phase, only listeners designated as capturers are triggered. These are registered with <code>true</code> as the third parameter in <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a>. Without specifying this parameter, it defaults to <code>false</code>, meaning the listener will not capture:
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">el.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, listener, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"></span></code></pre>
 </li>
 </ul>
@@ -18,7 +18,7 @@
 <li>
 <p><strong>Target phase</strong> (at the event target):</p>
 <ul>
-<li>Here, all listeners on the event target are activated, irrespective of their capture flag setting.</li>
+<li>here, all listeners on the event target are activated, irrespective of their capture flag setting.</li>
 </ul>
 </li>
 <li>
@@ -38,80 +38,89 @@
 <h2 id="preventing-default-actions-in-event-handling">Preventing Default Actions in Event Handling</h2>
 <p>The <code>preventDefault()</code> method is used within event handlers to prevent the browser from executing the default action associated with a specific event. This method is particularly useful in several scenarios:</p>
 <ul>
-<li><strong>Form Submission:</strong> To stop the browser from submitting a form the traditional way, which typically refreshes the page.</li>
-<li><strong>Links:</strong> To prevent navigation to a URL when clicking on a link, allowing for a custom behaviour to be implemented instead.</li>
-<li><strong>Drag-and-Drop Operations:</strong> To avoid the browser’s default handling of dragged data, like images or links.</li>
-<li><strong>Right-Click Menus:</strong> To prevent the default context menu from appearing on right-click, allowing a custom menu to be displayed.</li>
+<li><strong>Form Submission:</strong> to stop the browser from submitting a form the traditional way, which typically refreshes the page.</li>
+<li><strong>Links:</strong> to prevent navigation to a URL when clicking on a link, allowing for a custom behaviour to be implemented instead.</li>
+<li><strong>Drag-and-Drop Operations:</strong> to avoid the browser’s default handling of dragged data, like images or links.</li>
+<li><strong>Right-Click Menus:</strong> to prevent the default context menu from appearing on right-click, allowing a custom menu to be displayed.</li>
 </ul>
 <p>Here’s how you might use <code>preventDefault()</code> in a real-world scenario involving a form:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'form'</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'submit'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'form'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'submit'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
 <span class="line"><span style="color:#E1E4E8">    event.</span><span style="color:#B392F0">preventDefault</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// Stops the form from submitting traditionally</span></span>
 <span class="line"><span style="color:#6A737D">    // Additional code to handle the form submission via JavaScript</span></span>
-<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
 <span class="line"></span></code></pre>
 <p>Considerations When Using `preventDefault():</p>
 <ul>
-<li><strong>Conditional Use:</strong> Sometimes you may only want to prevent default behaviour under specific conditions. In such cases, you can wrap <code>preventDefault()</code> inside a conditional statement.</li>
-<li><strong>Event Bubbling:</strong> It’s important to note that <code>preventDefault()</code> does not stop the event from bubbling up the DOM tree, only <code>stopPropagation()</code> does that. Therefore, other handlers can still respond to the event unless explicitly stopped.</li>
+<li><strong>Conditional Use:</strong> sometimes you may only want to prevent default behaviour under specific conditions. In such cases, you can wrap <code>preventDefault()</code> inside a conditional statement.</li>
+<li><strong>Event Bubbling:</strong> it’s important to note that <code>preventDefault()</code> does not stop the event from bubbling up the DOM tree, only <code>stopPropagation()</code> does that. Therefore, other handlers can still respond to the event unless explicitly stopped.</li>
 </ul>
-<p>Example:  Consider a webpage with several links where, instead of navigating away, you want to load content dynamically:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document.</span><span style="color:#B392F0">querySelectorAll</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'a'</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">link</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
-<span class="line"><span style="color:#E1E4E8">    link.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
-<span class="line"><span style="color:#E1E4E8">        event.</span><span style="color:#B392F0">preventDefault</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// Prevents the link from navigating</span></span>
-<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> href</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> link.</span><span style="color:#B392F0">getAttribute</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'href'</span><span style="color:#E1E4E8">);</span></span>
-<span class="line"><span style="color:#6A737D">        // Function to load content dynamically based on the href value</span></span>
-<span class="line"><span style="color:#B392F0">        loadContent</span><span style="color:#E1E4E8">(href);</span></span>
-<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<p>Example: Consider a webpage with several links where, instead of navigating away, you want to load content dynamically:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document.</span><span style="color:#B392F0">querySelectorAll</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'a'</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">link</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  link.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    event.</span><span style="color:#B392F0">preventDefault</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// Prevents the link from navigating</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> href</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> link.</span><span style="color:#B392F0">getAttribute</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'href'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#6A737D">    // Function to load content dynamically based on the href value</span></span>
+<span class="line"><span style="color:#B392F0">    loadContent</span><span style="color:#E1E4E8">(href);</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
 <span class="line"><span style="color:#E1E4E8">});</span></span>
 <span class="line"></span></code></pre>
 <h2 id="determining-if-an-event-bubbles">Determining if an Event Bubbles</h2>
 <p>The <code>bubbles</code> property on the event object indicates if the event propagates through the DOM and returns a boolean value.</p>
 <h2 id="managing-event-propagation">Managing Event Propagation</h2>
-<p><code>stopPropagation()</code> – This method prevents the event from continuing to propagate up (bubbling) or down (capturing) the DOM tree. It’s useful in scenarios where you want to limit an event to a specific component or prevent parent elements from reacting to the same event triggered on a child element.</p>
-<p><code>stopImmediatePropagation()</code>– This extends the functionality of <code>stopPropagation()</code> by not only stopping the event from moving up or down the DOM but also preventing any other listeners on the same element from being executed. This is particularly valuable when multiple handlers are attached to a single element and could conflict or redundantly respond to the same event trigger.</p>
+<p><code>stopPropagation()</code> – this method prevents the event from continuing to propagate up (bubbling) or down (capturing) the DOM tree. It’s useful in scenarios where you want to limit an event to a specific component or prevent parent elements from reacting to the same event triggered on a child element.</p>
+<p><code>stopImmediatePropagation()</code>– this extends the functionality of <code>stopPropagation()</code> by not only stopping the event from moving up or down the DOM but also preventing any other listeners on the same element from being executed. This is particularly valuable when multiple handlers are attached to a single element and could conflict or redundantly respond to the same event trigger.</p>
 <p>Here’s a practical example of using <code>stopPropagation()</code> in an event handler for a nested element:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'innerDiv'</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'innerDiv'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
 <span class="line"><span style="color:#E1E4E8">    event.</span><span style="color:#B392F0">stopPropagation</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// Prevents the event from reaching the outer div</span></span>
 <span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Inner div clicked!'</span><span style="color:#E1E4E8">);</span></span>
-<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#E1E4E8">document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'outerDiv'</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">document</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'outerDiv'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8"> () {</span></span>
 <span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Outer div clicked!'</span><span style="color:#E1E4E8">);</span></span>
-<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
 <span class="line"></span></code></pre>
 <p>In this setup, clicking on <code>innerDiv</code> logs its message without triggering the click event of <code>outerDiv</code>, thanks to <code>stopPropagation()</code>.</p>
 <h2 id="using-event-bubbling-and-capturing-simultaneously-event-delegation">Using Event Bubbling and Capturing Simultaneously: Event Delegation</h2>
 <p>This approach involves attaching a single event listener to a parent element rather than setting individual listeners on each child. Here’s why and how this technique is beneficial:</p>
 <ul>
-<li><strong>Performance Optimisation:</strong> By reducing the number of event listeners, you minimise the memory usage and improve performance, particularly when dealing with a large number of elements.</li>
-<li><strong>Dynamic Content:</strong> It is ideal for elements that are dynamically added to the page. Since the listener is on the parent, any child, existing or newly added, will have the event handling capabilities without the need to attach new listeners.</li>
-<li><strong>Simplicity:</strong> It simplifies event management by centralising the handling in one location, reducing redundancy and potential errors in event handling setup.</li>
-<li></li>
+<li><strong>Performance Optimisation:</strong> by reducing the number of event listeners, you minimise the memory usage and improve performance, particularly when dealing with a large number of elements.</li>
+<li><strong>Dynamic Content:</strong> it is ideal for elements that are dynamically added to the page. Since the listener is on the parent, any child, existing or newly added, will have the event handling capabilities without the need to attach new listeners.</li>
+<li><strong>Simplicity:</strong> it simplifies event management by centralising the handling in one location, reducing redundancy and potential errors in event handling setup.</li>
 </ul>
 <p>In event delegation, the event listener is added to a parent element. During event propagation, when an event occurs on a child element, it bubbles up to the parent where the listener is triggered. Here, the event handler can check the origin of the event (using properties like <code>event.target</code>) and execute appropriate actions based on the target element.</p>
 <p>For example, if you have a <code>ul</code> list with numerous <code>li</code> items, instead of attaching a click event to each <code>li</code>, you attach it once to the <code>ul</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'ul'</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'ul'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
 <span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (event.target.tagName </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'LI'</span><span style="color:#E1E4E8">) {</span></span>
-<span class="line"><span style="color:#E1E4E8">        console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'List item clicked:'</span><span style="color:#E1E4E8">, event.target.textContent);</span></span>
+<span class="line"><span style="color:#E1E4E8">      console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'List item clicked:'</span><span style="color:#E1E4E8">, event.target.textContent);</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
 <span class="line"></span></code></pre>
 <p>This method ensures that any click on a list item, regardless of when it was added to the list, is handled appropriately without individual listeners on each item. Practical Use Cases:</p>
 <ul>
-<li>Handling clicks on a large table where each row or cell might trigger an action.</li>
-<li>Managing interactive lists where items can be added or removed.</li>
-<li>Simplifying form controls like buttons or checkboxes grouped in a panel.</li>
+<li>handling clicks on a large table where each row or cell might trigger an action.</li>
+<li>managing interactive lists where items can be added or removed.</li>
+<li>simplifying form controls like buttons or checkboxes grouped in a panel.</li>
 </ul>
 <p>In essence, event delegation is not just a technique but a fundamental approach to efficient event handling in modern web applications, taking full advantage of the event bubbling and capturing mechanisms.</p>
 <h2 id="understanding-eventtarget-vs-eventcurrenttarget">Understanding <code>Event.target</code> vs <code>Event.currentTarget</code></h2>
-<p><code>Event.target</code> – This property refers to the element that initially triggered the event. It is the most deeply nested element that was clicked or interacted with. For instance, if you have a button with a span inside it, and the user clicks on the span, <code>Event.target</code> would be the span.</p>
-<p><code>Event.currentTarget</code> – In contrast, <code>Event.currentTarget</code> refers to the element to which the event handler is currently attached. During the event’s propagation, this property always refers to the element whose event listener triggered the current function. If the same button mentioned earlier has an event listener, and the span inside it is clicked, <code>Event.currentTarget</code> would be the button, assuming the listener was attached to the button.</p>
+<p><code>Event.target</code> – this property refers to the element that initially triggered the event. It is the most deeply nested element that was clicked or interacted with. For instance, if you have a button with a span inside it, and the user clicks on the span, <code>Event.target</code> would be the span.</p>
+<p><code>Event.currentTarget</code> – in contrast, <code>Event.currentTarget</code> refers to the element to which the event handler is currently attached. During the event’s propagation, this property always refers to the element whose event listener triggered the current function. If the same button mentioned earlier has an event listener, and the span inside it is clicked, <code>Event.currentTarget</code> would be the button, assuming the listener was attached to the button.</p>
 <p>It allows developers to precisely determine where an event originated (<code>Event.target</code>) versus where it is being handled (<code>Event.currentTarget</code>).</p>
 <p>Here’s a practical example to illustrate their use:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#button'</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">document</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#button'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
 <span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Event.target:'</span><span style="color:#E1E4E8">, event.target.tagName); </span><span style="color:#6A737D">// Could be 'SPAN'</span></span>
 <span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Event.currentTarget:'</span><span style="color:#E1E4E8">, event.currentTarget.tagName); </span><span style="color:#6A737D">// Always 'BUTTON'</span></span>
-<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
 <span class="line"></span></code></pre>
 <p>In this code, if a user clicks on a span inside a button, <code>Event.target</code> logs ‘SPAN’, and <code>Event.currentTarget</code> logs ‘BUTTON’. This distinction is particularly useful for implementing event delegation or handling events on a parent element while knowing the specific target that triggered the event.</p>
 <h2 id="non-bubbling-events">Non-bubbling Events</h2>
@@ -123,6 +132,6 @@
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event">mouseenter</a> (Contrast with <a href="https://transang.me/everything-about-event-bubbling/mouseover">mouseover</a>, which does bubble).</li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event">load</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/unload_event">unload</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/abort_event">abort</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/error_event">error</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event">beforeunload</a>.</li>
 </ul>
-<p>Note: Events that do bubble have <code>true</code> set on the <code>bubbles</code> option when the event is created, though they still undergo the Capturing phase.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/frontend">frontend</a><a href="/blog/topics/HTML">HTML</a><a href="/blog/topics/DOM">DOM</a><a href="/blog/topics/event">event</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+<p>Note: events that do bubble have <code>true</code> set on the <code>bubbles</code> option when the event is created, though they still undergo the Capturing phase.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/frontend">frontend</a><a href="/blog/topics/HTML">HTML</a><a href="/blog/topics/DOM">DOM</a><a href="/blog/topics/event">event</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
 Made with ♥︎ by Irina Korotkaya
 </div> </body></html>
