@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: 'Create Astro Project'
+title: 'Create astro project'
 pubDate: '2024 03 25'
 tags: ['astro', 'blog']
 ---

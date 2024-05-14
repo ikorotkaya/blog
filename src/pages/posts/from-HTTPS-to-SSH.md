@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: 'Switch from HTTPS to SSH for GitHub Access'
+title: 'Switch from HTTPS to SSH for GitHub access'
 pubDate: '2024-03-20'
 tags: ['git', 'github', 'ssh', 'https']
 ---
@@ -15,7 +15,7 @@ I needed to switch working computers and wanted to access my GitHub repositories
 
 ## Steps to Switch to SSH
 
-1. **Generate an SSH key pair**: First, you need to create a new SSH key pair on your computer. Open your terminal or command prompt and type:
+1. **Generate an SSH key pair**: first, you need to create a new SSH key pair on your computer. Open your terminal or command prompt and type:
 
    ```sh
    ssh-keygen
@@ -23,13 +23,13 @@ I needed to switch working computers and wanted to access my GitHub repositories
 
    Follow the prompts to choose a file location and passphrase. This generates two files: your private key (`id_rsa`) and public key (`id_rsa.pub`).
 
-2. **Add your SSH key to GitHub**: Open the `id_rsa.pub` file with a text editor and copy its contents:
+2. **Add your SSH key to GitHub**: open the `id_rsa.pub` file with a text editor and copy its contents:
 
-   - Go to GitHub and click on your profile picture, then click on `Settings`.
-   - In the sidebar, click `SSH and GPG Keys`, then `New SSH Key`.
-   - Paste your public key into the field, give it a title, and click `Add SSH key`.
+   - go to GitHub and click on your profile picture, then click on `Settings`.
+   - in the sidebar, click `SSH and GPG Keys`, then `New SSH Key`.
+   - paste your public key into the field, give it a title, and click `Add SSH key`.
 
-3. **Change Your Repository’s Remote URL**: Change your repository's remote URL from HTTPS to SSH. In your terminal, go to your repository directory and run:
+3. **Change Your Repository’s Remote URL**: change your repository's remote URL from HTTPS to SSH. In your terminal, go to your repository directory and run:
 
    ```sh
    git remote set-url origin git@github.com:username/repository.git

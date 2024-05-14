@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: 'Partial<T>'
+title: 'Partial<T> type'
 pubDate: '2024-05-03'
 tags: ['frontend', 'typescript', 'types']
 ---
@@ -17,7 +17,7 @@ sortNullsConfig?: Partial<Record<TSortableField, SortNulls>>;
 
 In this updated type definition:
 
-- `Record<TSortableField, SortNulls>`: This means we’re creating a type where each sortable field should have a corresponding `SortNulls` value.
-- `Partial<...>`: By wrapping the record with `Partial`, we make it so you can include any or none of the fields. Each property becomes optional.
+- `Record<TSortableField, SortNulls>`: this means we’re creating a type where each sortable field should have a corresponding `SortNulls` value.
+- `Partial<...>`: by wrapping the record with `Partial`, we make it so you can include any or none of the fields. Each property becomes optional.
 
 This tweak makes you code adaptable to different scenarios without errors.
