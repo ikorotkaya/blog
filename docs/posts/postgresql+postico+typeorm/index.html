@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.CSI6htF5.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Set up a PostgreSQL, Postico and TypeORM project</h1> <p>14 May 2024</p> </header> <main> <p>Here’s a short guide on how to set up a PostgreSQL database, connect it to Postico (a macOS PostgreSQL client), and configure a TypeORM project.</p>
+<p><strong>Step 1: Check PostgreSQL Server</strong></p>
+<p>Check that your PostgreSQL server is running. If it’s not, you can start it with this command on macOS:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> services</span><span style="color:#9ECBFF"> start</span><span style="color:#9ECBFF"> postgresql</span></span>
+<span class="line"></span></code></pre>
+<p><strong>Step 2: Create Database Using Postico</strong></p>
+<ol>
+<li><strong>Open Postico</strong> and select “New Server”.</li>
+<li><strong>Connect to Server</strong>:
+<ul>
+<li><strong>Nickname</strong>: Provide a descriptive name for your connection.</li>
+<li><strong>Host</strong>: Use <code>localhost</code>.</li>
+<li><strong>User</strong>: Enter your PostgreSQL username.</li>
+<li><strong>Password</strong>: Enter your PostgreSQL password.</li>
+<li><strong>Port</strong>: Use <code>5432</code>, the default PostgreSQL port.</li>
+<li>Click “Connect”.</li>
+</ul>
+</li>
+<li><strong>Create Database</strong>:
+<ul>
+<li>Once connected, click on <code>+ Database</code> at the bottom left of the window.</li>
+<li>Enter the desired database name and confirm its creation.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Step 3: Configure TypeORM</strong></p>
+<p>Configure TypeORM in your project. This configuration usually locates in a file named <code>ormconfig.json</code> or <code>data-source.ts</code>. Here’s an example:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "type"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"postgres"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "host"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"localhost"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "port"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">5432</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "username"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"username"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "password"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"password"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "database"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"typeorm_basics"</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>Make sure to replace <code>"password"</code> with your actual PostgreSQL password and <code>"typeorm_basics"</code> with the name of your newly created database.</p>
+<p><strong>Step 4: Start Your TypeORM Project</strong></p>
+<p>In your project directory, start your TypeORM application with:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> start</span></span>
+<span class="line"></span></code></pre>
+<p>This command starts your project, and TypeORM connects to the database.</p>
+<p><strong>Alternatively, Create and Manage the Database via Terminal:</strong></p>
+<ol>
+<li><strong>Connect to PostgreSQL</strong>:
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">psql</span><span style="color:#79B8FF"> -U</span><span style="color:#9ECBFF"> username</span><span style="color:#79B8FF"> -h</span><span style="color:#9ECBFF"> localhost</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li><strong>Create Database</strong>:
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> DATABASE</span><span style="color:#B392F0"> typeorm_basics</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li><strong>Grant Permissions</strong>:
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">GRANT</span><span style="color:#E1E4E8"> ALL PRIVILEGES </span><span style="color:#F97583">ON</span><span style="color:#F97583"> DATABASE</span><span style="color:#E1E4E8"> typeorm_basics </span><span style="color:#F97583">TO</span><span style="color:#E1E4E8"> username;</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li><strong>Exit psql</strong>:
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">\q</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li>Finally, navigate to your project directory and run:
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> start</span></span>
+<span class="line"></span></code></pre>
+</li>
+</ol>
+<p>This process should get you up and running with PostgreSQL, Postico, and TypeORM, making it easier to manage your data effectively.</p>
+<p>Additional note for myself: to list all database names, use:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span>psql -l</span></span>
+<span class="line"><span></span></span></code></pre> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/coding">coding</a><a href="/blog/topics/typeorm">typeorm</a><a href="/blog/topics/postico">postico</a><a href="/blog/topics/database">database</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
