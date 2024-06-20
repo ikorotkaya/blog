@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.DSOGZc2f.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Upstream branch</h1> <p>23 May 2024</p> </header> <main> <p>I wanted to switch to a different branch in our Git repository and pull the latest changes from thar branch, but I got an error. Here’s what happened and how I fixed it.</p>
+<p>First, I switched to the branch I needed using the command:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> checkout</span><span style="color:#9ECBFF"> feature/your-branch-name</span></span>
+<span class="line"></span></code></pre>
+<p>Then, I tried to pull the latest changes with:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> pull</span></span>
+<span class="line"></span></code></pre>
+<p>But I got this error:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span>There is no tracking information for the current branch.</span></span>
+<span class="line"><span>Please specify which branch you want to merge with.</span></span>
+<span class="line"><span>See git-pull(1) for details.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    git pull &#x3C;remote> &#x3C;branch></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>If you wish to set tracking information for this branch you can do so with:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    git branch --set-upstream-to=origin/&#x3C;branch> feature/your-branch-name</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This happened because the branch I was on didn’t have an “upstream branch” set. <em>An upstream branch tells Git where to pull the changes from.</em></p>
+<p>To fix this, I needed to set the upstream branch for my current branch. Here’s how I did it:</p>
+<ol>
+<li>
+<p><strong>Set the upstream branch:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> branch</span><span style="color:#79B8FF"> --set-upstream-to=origin/feature/your-branch-name</span><span style="color:#9ECBFF"> feature/your-branch-name</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li>
+<p><strong>Pull the latest changes:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> pull</span></span>
+<span class="line"></span></code></pre>
+</li>
+</ol>
+<p>Here’s a quick explanation of what these commands do:</p>
+<ul>
+<li><code>git branch --set-upstream-to=origin/feature/your-branch-name feature/your-branch-name</code> sets the branch <code>origin/feature/your-branch-name</code> as the upstream for my current branch.</li>
+<li><code>git pull</code> then pulls the latest changes from that upstream branch.</li>
+</ul>
+<p><em>If you’re ever unsure about which branch you’re on or what its upstream is, you can check with:</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> status</span></span>
+<span class="line"></span></code></pre>
+<p>Or to see the branches and their upstreams:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> branch</span><span style="color:#79B8FF"> -vv</span></span>
+<span class="line"></span></code></pre>
+<p>Another way to do this all in one step is to specify the remote branch directly when pulling:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> pull</span><span style="color:#9ECBFF"> origin</span><span style="color:#9ECBFF"> feature/your-branch-name</span></span>
+<span class="line"></span></code></pre>
+<p>This command will both pull the latest changes and set the upstream branch.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/git">git</a><a href="/blog/topics/branch">branch</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
