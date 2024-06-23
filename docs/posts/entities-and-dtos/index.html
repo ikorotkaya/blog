@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.DSOGZc2f.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>DTOs, entities, frontend and backend connections</h1> <p>23 June 2024</p> </header> <main> <p>I came across a problem where I needed to add a label for units in the units table. I use the label info from property entity where the units are stored, but the required field wasn’t there in our current set-up. So, I had to update the DTO on the backend and then use code generation to create new types on the frontend. This way, we could successfully add and display the new label for the units.</p>
+<h1 id="backend-components">Backend Components</h1>
+<p><strong>Entities</strong>:</p>
+<p>In a backend framework like NestJS, Entities represent tables in a database when using TypeORM. They lay out the structure of the tables, including the columns and data types.</p>
+<p>Updating Entities: If you’re making changes to an entity, like adding a new column, you’ll usually need to create a migration. A migration is a script or set of operations that alters the database schema to match the changes in your entities. This is how any changes to the entity definitions get reflected in the database.</p>
+<p><strong>DTOs (Data Transfer Objects)</strong>:</p>
+<p>DTOs are used to define the shape and data validation of the requests that come in to your API. They help to structure the data that comes into your endpoints, and are really important in applications that use GraphQL or RESTful APIs.</p>
+<p>Modifying DTOs: When you make changes to DTOs, like adding a new field, it usually affects how data is accepted from the client or returned to it. These changes often mean that the frontend needs to be updated to handle the new data structures.</p>
+<h1 id="frontend-components">Frontend Components</h1>
+<p><strong>GraphQL Model Updates</strong>:</p>
+<p>GraphQL models are basically the blueprint for how the frontend interacts with the GraphQL server. When there are changes to the GraphQL schema on the backend (often due to changes to DTOs or query/mutation definitions), these changes need to be reflected in the frontend.</p>
+<p>Running Codegen: If your frontend uses tools like Apollo and has a code generation tool (which is often called codegen), any update to the GraphQL schema means you have to run the codegen again. This process updates the types and query hooks in your frontend application that were generated locally to match the new schema definitions from the backend.</p>
+<h1 id="workflow-summary">Workflow Summary</h1>
+<ol>
+<li>
+<p><strong>Update Entity</strong>: If you need to add a new database column, just update your entity definition in the backend.</p>
+</li>
+<li>
+<p><strong>Create Migration</strong>: Once you’ve updated the entity, you can create and run a migration to alter the database schema.</p>
+</li>
+<li>
+<p><strong>Update DTO</strong>: If you need to expose this new data to your API, just update your DTOs to include it.</p>
+</li>
+<li>
+<p><strong>Update GraphQL Schema</strong>: Make necessary changes to your GraphQL types and resolvers to expose the new data.</p>
+</li>
+<li>
+<p><strong>Run Codegen on FE</strong>: Once you’ve made updates to the GraphQL schema, you’ll need to run the frontend codegen to update the types and any other generated code that interacts with these types.</p>
+</li>
+<li>
+<p><strong>Update GraphQL Queries/Fragments on FE</strong>: Once you’ve updated your frontend types with codegen, you’ll need to make any affected GraphQL queries, mutations, or fragments include the new data fields. For instance, if you’ve added a new field called ‘birthdate’ to the user entity and it’s now available through your GraphQL API, you’ll need to update the relevant query or fragment like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">fragment</span><span style="color:#B392F0"> UserDetails</span><span style="color:#F97583"> on</span><span style="color:#79B8FF"> User</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#FFAB70">  id</span></span>
+<span class="line"><span style="color:#FFAB70">  username</span></span>
+<span class="line"><span style="color:#FFAB70">  email</span></span>
+<span class="line"><span style="color:#FFAB70">  birthdate</span><span style="color:#6A737D"> # newly added field</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>You can use these queries or fragments to adjust any frontend components so that your application’s UI reflects the new data. This is a really important step for making the new data accessible and usable within your application.</p>
+</li>
+<li>
+<p><strong>Update Frontend Usage</strong>: Once you’ve got the new data types and queries set up, you can make the necessary changes to the frontend logic.</p>
+</li>
+</ol>
+<p>This workflow makes sure that your backend and frontend are in sync with each other when it comes to data structures and API contracts. This makes it easier for the client and server to exchange data.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/dto">dto</a><a href="/blog/topics/apollo">apollo</a><a href="/blog/topics/entity">entity</a><a href="/blog/topics/codegen">codegen</a><a href="/blog/topics/migration">migration</a><a href="/blog/topics/query">query</a><a href="/blog/topics/view">view</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
