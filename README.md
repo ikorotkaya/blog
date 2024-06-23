@@ -22,7 +22,7 @@ tags: ['tag1', 'tag2'] // Appropriate tags that relate to the content of your po
 
 ## Why Astro?
 
-Astro is selected as the platform for this blog due to its innovative approach to web development. It combines static site generation with dynamic component rendering, offering rapid loading times and enhanced performance. The framework supports a variety of front-end technologies, making it exceptionally adaptable and developer-friendly.
+Astro is chosen as the platform for this blog because it offers a new and smart way to build websites. It combines creating static pages with dynamic parts, which means the site loads quickly and performs better. Astro also works well with many front-end technologies, making it very flexible and easy for developers to use.
 
 ## Technologies used
 
