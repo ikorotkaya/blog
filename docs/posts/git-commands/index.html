@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.DSOGZc2f.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>My most frequently used Git commands</h1> <p>06 June 2024</p> </header> <main> <p>I’ve been learning a lot about Git while working, and I wanted to document some useful commands that I use on a daily basis.</p>
+<h3 id="resetting-changes">Resetting Changes</h3>
+<ul>
+<li>
+<p><strong>Discard all local changes and revert to the last commit:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span><span style="color:#79B8FF"> --hard</span></span>
+<span class="line"></span></code></pre>
+<p>This command will remove all local changes and reset your working directory to match the last commit.</p>
+</li>
+<li>
+<p><strong>Undo the last commit and unstage all changes (if you didn’t push it yet):</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span></span>
+<span class="line"></span></code></pre>
+<p>This will undo the last commit, but keep your changes in the working directory.</p>
+</li>
+<li>
+<p><strong>Unstage a file but keep the changes:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span><span style="color:#9ECBFF"> HEAD</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">fil</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span></span>
+<span class="line"></span></code></pre>
+<p>This unstages the specified file, keeping the changes in the working directory.</p>
+</li>
+</ul>
+<h3 id="stashing-changes">Stashing Changes</h3>
+<ul>
+<li>
+<p><strong>Save all local changes for later:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> stash</span></span>
+<span class="line"></span></code></pre>
+<p>This command stashes your changes, allowing you to apply them later.</p>
+</li>
+<li>
+<p><strong>Apply stashed changes:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> stash</span><span style="color:#9ECBFF"> apply</span></span>
+<span class="line"></span></code></pre>
+<p>This command re-applies stashed changes to your working directory.</p>
+</li>
+</ul>
+<h3 id="working-with-commits">Working with Commits</h3>
+<ul>
+<li>
+<p><strong>Undo the last commit but keep everything else intact:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span><span style="color:#79B8FF"> --soft</span><span style="color:#9ECBFF"> HEAD</span></span>
+<span class="line"></span></code></pre>
+<p>This keeps your changes staged but removes the last commit.</p>
+</li>
+<li>
+<p><strong>Discard all uncommitted changes and reset to the previous commit:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span><span style="color:#79B8FF"> --hard</span><span style="color:#9ECBFF"> HEAD</span></span>
+<span class="line"></span></code></pre>
+<p>This completely removes any local changes and resets to the last commit.</p>
+</li>
+<li>
+<p><strong>Go back five commits, resetting everything:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span><span style="color:#79B8FF"> --hard</span><span style="color:#9ECBFF"> HEAD~5</span></span>
+<span class="line"></span></code></pre>
+<p>This will take your project back five commits, discarding all changes made since then.</p>
+</li>
+<li>
+<p><strong>Go back five commits, keeping your changes:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span><span style="color:#79B8FF"> --soft</span><span style="color:#9ECBFF"> HEAD~5</span></span>
+<span class="line"></span></code></pre>
+<p>This moves the HEAD back five commits but keeps your changes in the working directory.</p>
+</li>
+</ul>
+<h3 id="merging-and-rebasing">Merging and Rebasing</h3>
+<ul>
+<li>
+<p><strong>Merge changes from another branch:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> merge</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">branch-nam</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span></span>
+<span class="line"></span></code></pre>
+<p>This merges the specified branch into your current branch.</p>
+</li>
+<li>
+<p><strong>Rebase your current branch onto another branch:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> rebase</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">branch-nam</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span></span>
+<span class="line"></span></code></pre>
+<p>This re-applies your commits on top of the specified branch.</p>
+</li>
+<li>
+<p><strong>Force push after merging or rebasing:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> push</span><span style="color:#79B8FF"> --force</span></span>
+<span class="line"></span></code></pre>
+<p>This forces the push of your local changes to the remote repository, even if there are conflicts.</p>
+</li>
+</ul>
+<h3 id="viewing-commit-logs-and-diffs">Viewing Commit Logs and Diffs</h3>
+<ul>
+<li>
+<p><strong>See a log of all commits between origin/main and HEAD:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> log</span><span style="color:#9ECBFF"> origin/main..HEAD</span></span>
+<span class="line"></span></code></pre>
+<p>This shows all the commits that are in your local branch but not in the origin/main branch.</p>
+</li>
+<li>
+<p><strong>View the diff between origin/main and HEAD:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> diff</span><span style="color:#9ECBFF"> origin/main..HEAD</span></span>
+<span class="line"></span></code></pre>
+<p>This shows the differences between your current branch and the origin/main branch.</p>
+</li>
+</ul>
+<p>These commands have been incredibly useful for managing my codebase and keeping track of changes. This post will be updated as I learn more about Git and discover new commands.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/git">git</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
