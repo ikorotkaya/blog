@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.lPvDb9OO.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Implementing infinite scroll using Intersection Observer API</h1> <p>10 July 2024</p> </header> <main> <p>We had an issue with our transactions table where users had to click a <code>Load More</code> button to fetch additional transactions. This wasn’t smooth and took up users’ time. So, we decided to implement infinite scrolling to load more data automatically as users scroll down.</p>
+<h3 id="initial-approach-with-scroll-event-listener">Initial Approach with Scroll Event Listener</h3>
+<p>The first thing I tried to do was to use the <code>useEffect</code> hook with a traditional scroll event listener, which can lead to frequent re-calculations and renderings:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">useEffect</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#B392F0"> handleScroll</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">scrollTop</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">clientHeight</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">scrollHeight</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">      document.documentElement;</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">      scrollTop </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> clientHeight </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> scrollHeight </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 100</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#F97583">      !</span><span style="color:#E1E4E8">loading </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">      pageInfo.hasNextPage</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) {</span></span>
+<span class="line"><span style="color:#B392F0">      onFetchMore</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  window.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'scroll'</span><span style="color:#E1E4E8">, handleScroll);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    window.</span><span style="color:#B392F0">removeEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'scroll'</span><span style="color:#E1E4E8">, handleScroll);</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"><span style="color:#E1E4E8">}, [loading, pageInfo, onFetchMore]);</span></span>
+<span class="line"></span></code></pre>
+<p>The <code>handleScroll</code> function checks if the user is close to the bottom of the page (<code>scrollTop + clientHeight > scrollHeight - 100</code>). You can adjust the <code>100</code> pixel threshold as needed.</p>
+<p><strong>Advantages:</strong></p>
+<ol>
+<li><strong>Simple</strong>: Easy to implement and understand.</li>
+<li><strong>Control</strong>: Direct access to the scroll event.</li>
+</ol>
+<p><strong>Disadvantages:</strong></p>
+<ol>
+<li><strong>Performance</strong>: Scroll events fire frequently, which can lead to performance issues.</li>
+<li><strong>Precision</strong>: It’s harder to precisely determine when the last item is in view.</li>
+</ol>
+<h3 id="improved-approach-with-intersection-observer-api">Improved Approach with Intersection Observer API</h3>
+<p>We switched to using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">Intersection Observer API</a>, which is more efficient and accurate. This API allows us to observe changes in the intersection of a target element with a parent element or the viewport.</p>
+<p><strong>Advantages:</strong></p>
+<ol>
+<li><strong>Performance</strong>: More efficient as it doesn’t require continuous event handling.</li>
+<li><strong>Accuracy</strong>: Precisely detects when an element is in view.</li>
+<li><strong>Less Code</strong>: No need to manually calculate positions.</li>
+</ol>
+<p><strong>Disadvantages:</strong></p>
+<ol>
+<li><strong>Complexity</strong>: Slightly more complex to set up.</li>
+<li><strong>Browser Support</strong>: May need <a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">polyfills</a> for older browsers.</li>
+</ol>
+<h3 id="implementing-infinite-scroll-with-intersection-observer-api">Implementing Infinite Scroll with Intersection Observer API</h3>
+<h4 id="1-set-up-the-hook-and-state">1. Set Up the Hook and State</h4>
+<p>The hook defines an interface <code>UseInfiniteScrollProps</code> to specify the expected properties. First, I defined the properties we get from our data fetching hook:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">resources</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">pageInfo</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">loading</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">fetchMore</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> useResourcesQuery</span><span style="color:#F97583">&#x3C;</span></span>
+<span class="line"><span style="color:#E1E4E8">  RentalContractsQuery,</span></span>
+<span class="line"><span style="color:#E1E4E8">  RentalContractsQueryVariables</span></span>
+<span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  query: </span><span style="color:#79B8FF">RENTAL_CONTRACTS_QUERY</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  variables</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span></code></pre>
+<ul>
+<li><code>onFetchMore</code>: A function that triggers the loading of additional data.</li>
+<li><code>hasMore</code>: A boolean indicating whether there is more data to load.</li>
+<li><code>loading</code>: A boolean to track if a data fetch is currently in progress, preventing multiple concurrent fetches.</li>
+</ul>
+<h4 id="2-use-useref-for-intersection-observer">2. Use <code>useRef</code> for Intersection Observer</h4>
+<p>The <a href="https://react.dev/reference/react-dom/components/common#ref-callback"><code>useRef</code></a> hook is used to maintain a mutable reference to the <code>IntersectionObserver</code> instance. This reference does not trigger re-renders when it changes.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> observerRef</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> useRef</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">IntersectionObserver</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">>(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span></code></pre>
+<p>This line initializes the observer reference but does not yet create the <code>IntersectionObserver</code>.</p>
+<h4 id="3-callback-ref-for-observing-elements">3. Callback Ref for Observing Elements</h4>
+<p>The <code>useCallback</code> hook creates a memoized callback function that assigns the Intersection Observer to the <code>lastElementRefCallback</code>, the element at the bottom of the list:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> lastElementRefCallback</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> useCallback</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  (</span><span style="color:#FFAB70">node</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // Do not re-attach the observer if data is being loaded</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (loading) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Disconnect any existing observer to reset or prevent multiple instances observing different elements.</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (observerRef.current) observerRef.current.</span><span style="color:#B392F0">disconnect</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    observerRef.current </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> IntersectionObserver</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">entries</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (entries[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">].isIntersecting </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> hasMore) {</span></span>
+<span class="line"><span style="color:#6A737D">        // Trigger data loading if the observed element is intersecting and there is more data</span></span>
+<span class="line"><span style="color:#B392F0">        onFetchMore</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Attach the observer to the new node</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (node) observerRef.current.</span><span style="color:#B392F0">observe</span><span style="color:#E1E4E8">(node);</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">  [loading, hasMore, onFetchMore]</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span></code></pre>
+<p>This callback function is called every time the component that it is attached to (usually the last item in the list) mounts or unmounts.</p>
+<ul>
+<li>If <code>loading</code> is true, the callback exits early to prevent unnecessary operations.</li>
+<li>It <a href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/disconnect">disconnects</a> any previous observers to avoid duplicates.</li>
+<li>A new <code>IntersectionObserver</code> is created and given a callback function that checks if the element is intersecting and if more data can be loaded.</li>
+<li>The observer is then attached to the passed <code>node</code>.</li>
+</ul>
+<h4 id="4-cleanup-on-unmount">4. Cleanup on Unmount</h4>
+<p>The <code>useEffect</code> hook ensures that the Intersection Observer is cleaned up when the component unmounts:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">useEffect</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (observerRef.current) observerRef.current.</span><span style="color:#B392F0">disconnect</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">  []</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span></code></pre>
+<p>This cleanup function runs when the component unmounts, disconnecting the Intersection Observer to prevent memory leaks and removing it from the element it was observing.</p>
+<h4 id="5-returning-the-ref">5. Returning the Ref</h4>
+<p>Finally, the hook returns a functional component that renders the element to be observed:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> InfiniteScrollLastObservedElement</span><span style="color:#F97583">:</span><span style="color:#B392F0"> FC</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#F97583">  &#x3C;></span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span><span style="color:#FFAB70">loading</span><span style="color:#E1E4E8"> ? (</span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#FFAB70">Icon</span></span>
+<span class="line"><span style="color:#FFAB70">        name</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">'loading'</span><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#FFAB70">        className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"animate-spin fill-stone-400 dark:fill-neutral-400 mt-8"</span></span>
+<span class="line"><span style="color:#E1E4E8">      /></span></span>
+<span class="line"><span style="color:#E1E4E8">    ) : </span><span style="color:#FFAB70">null</span><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">    &#x3C;</span><span style="color:#E1E4E8">div ref</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{lastElementRefCallback} style</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{{ </span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> }}</span><span style="color:#F97583">></span><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#B392F0">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#F97583">  &#x3C;/></span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">return</span><span style="color:#E1E4E8"> { InfiniteScrollLastObservedElement };</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<h3 id="usage-in-a-component">Usage in a Component</h3>
+<p>This setup automatically loads more content as the user scrolls down, improving the user experience significantly.</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/frontend">frontend</a><a href="/blog/topics/react">react</a><a href="/blog/topics/javascript">javascript</a><a href="/blog/topics/performance">performance</a><a href="/blog/topics/api">api</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
