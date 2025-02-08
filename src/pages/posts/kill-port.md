@@ -17,11 +17,14 @@ I usually used two commands (two-step process):
    ```sh
    lsof -t -i tcp:1234
    ```
+
 - **`lsof -t -i tcp:1234`**: Lists the process ID (PID) using TCP port 1234.
+
 2. Kill the process:
    ```sh
    kill <PID>
    ```
+
 - **`kill <PID>`**: Stops the process with the given PID.
 
 ### One-step command

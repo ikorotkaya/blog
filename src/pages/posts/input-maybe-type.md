@@ -22,6 +22,7 @@ type Maybe<T> = T | null | undefined;
 ```
 
 This setup allows a variable of type `InputMaybe<T>` to accept three kinds of values:
+
 1. a value of type `T` (the specific expected type, like `SortNulls`).
 2. `null` (allows explicitly setting the value to null).
 3. `undefined` (the value can be omitted).

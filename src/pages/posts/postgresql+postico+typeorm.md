@@ -75,13 +75,14 @@ This command starts your project, and TypeORM connects to the database.
    \q
    ```
 5. Finally, navigate to your project directory and run:
-	```bash
-	npm start
-	```
+   ```bash
+   npm start
+   ```
 
 This process should get you up and running with PostgreSQL, Postico, and TypeORM, making it easier to manage your data effectively.
 
 Additional note for myself: to list all database names, use:
+
 ```
 psql -l
 ```

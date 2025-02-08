@@ -26,11 +26,11 @@ Astro is chosen as the platform for this blog because it offers a new and smart 
 
 ## Technologies used
 
-* Astro
-* Typescript 
-* Tailwind CSS
-* Tailwind Typography
-* Vercel for hosting
+- Astro
+- Typescript
+- Tailwind CSS
+- Tailwind Typography
+- Vercel for hosting
 
 ## Development
 

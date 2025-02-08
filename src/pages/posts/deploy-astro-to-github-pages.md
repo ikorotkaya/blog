@@ -10,9 +10,9 @@ tags: ['astro', 'blog', 'github-pages', 'deployment', 'static-site']
 The first thing you need to do is adapt your project configuration to GitHub Pages:
 
 1. **Disable Jekyll Processing**:
-  create a `.nojekyll` file in the root of your project and any relevant subdirectories such as `/public/` and `/public/astro/`. This tells GitHub Pages to ignore Jekyll, preventing conflicts with your static files.
+   create a `.nojekyll` file in the root of your project and any relevant subdirectories such as `/public/` and `/public/astro/`. This tells GitHub Pages to ignore Jekyll, preventing conflicts with your static files.
 2. **Adjust Astro Configuration**:
-  when preparing your Astro project for deployment on GitHub Pages, it's important to configure the `astro.config.mjs` file.This configuration prepares your project for static site generation and ensures proper deployment on GitHub Pages, especially regarding how URLs and links are handled:
+   when preparing your Astro project for deployment on GitHub Pages, it's important to configure the `astro.config.mjs` file.This configuration prepares your project for static site generation and ensures proper deployment on GitHub Pages, especially regarding how URLs and links are handled:
 
 ```javascript
 // Example configuration for Astro
@@ -27,9 +27,9 @@ export default defineConfig({
 Key Configuration: The Base URL
 
 - **Why Set a Base URL**:
-GitHub Pages by default serves your project from a URL structured as `<username>.github.io`. If your repository name is not simply `<username>.github.io` but includes additional paths (like `<username>.github.io/project-name/`), you need to specify this in the base URL setting in your Astro configuration. This base URL helps Astro understand the root directory of your site relative to the custom URL path.
-- **Impact on Links**: 
-by setting the `base` property to `/project-name/`, you ensure that all internal links are prefixed with this base. This is essential because, without the correct base setting, your site's navigation and resource links will not point to the correct paths, leading to broken pages and missing assets when viewed on GitHub Pages.
+  GitHub Pages by default serves your project from a URL structured as `<username>.github.io`. If your repository name is not simply `<username>.github.io` but includes additional paths (like `<username>.github.io/project-name/`), you need to specify this in the base URL setting in your Astro configuration. This base URL helps Astro understand the root directory of your site relative to the custom URL path.
+- **Impact on Links**:
+  by setting the `base` property to `/project-name/`, you ensure that all internal links are prefixed with this base. This is essential because, without the correct base setting, your site's navigation and resource links will not point to the correct paths, leading to broken pages and missing assets when viewed on GitHub Pages.
 
 ```javascript
 // Example of how to set up internal links with a base URL

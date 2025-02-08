@@ -33,7 +33,7 @@ touch index.astro
 Add basic HTML structure to your `index.astro` file:
 
 ```html
---- 
+---
 // This is the frontmatter section where you can import components and define metadata. See Step 8 for an example of importing a NavBar component.
 ---
 
