@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/blog/site.webmanifest"><title></title><meta name="description"><link rel="stylesheet" href="/blog/_astro/about.BPOQviKn.css"></head> <body class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"> <div class="border-b border-tapa-100 mb-8"> <div class="flex text-center justify-between items-center my-10 text-lg w-full"> <div> <a href="/blog/" class="no-underline hover:text-smalt">Irina's Notes</a> </div> <div class="flex flex-row gap-4"> <a href="/blog/posts/" class="hover:text-smalt no-underline"> Posts </a><a href="/blog/topics/" class="hover:text-smalt no-underline"> Topics </a><a href="/blog/about/" class="hover:text-smalt no-underline"> About </a> </div> </div> </div>  <article class="flex flex-col max-w-full flex-grow"> <header> <h1>Improving Theme Handling in Next.js with `next-themes`</h1> <p>08 February 2025</p> </header> <main> <p>When implementing theme toggling in a Next.js project using <code>next-themes</code>, it’s essential to ensure that the default theme correctly respects the system preference.</p>
+<h2 id="the-issue-with-default-theme-handling">The Issue with Default Theme Handling</h2>
+<p>In a typical implementation, developers often derive the theme from cookies and set a default value like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> appTheme</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#E1E4E8">  cookieStore.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'appTheme'</span><span style="color:#E1E4E8">)?.value </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'dark'</span><span style="color:#F97583"> ?</span><span style="color:#9ECBFF"> 'dark'</span><span style="color:#F97583"> :</span><span style="color:#9ECBFF"> 'light'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span></code></pre>
+<p>However, this approach does not account for system preferences when no explicit theme is set. Instead, the default should be <code>'system'</code> to respect the user’s OS settings.</p>
+<h2 id="correcting-the-default-theme-logic">Correcting the Default Theme Logic</h2>
+<p>To ensure the default theme accurately reflects the system preference, modify the logic as follows:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> appTheme</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> cookieStore.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'appTheme'</span><span style="color:#E1E4E8">)?.value </span><span style="color:#F97583">??</span><span style="color:#9ECBFF"> 'system'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span></code></pre>
+<h3 id="updated-root-component">Updated Root Component</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#F97583"> async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> Root</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">props</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#FFAB70">  children</span><span style="color:#F97583">:</span><span style="color:#B392F0"> ReactNode</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#FFAB70">  params</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Promise</span><span style="color:#E1E4E8">&#x3C;{ </span><span style="color:#FFAB70">locale</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8"> }>;</span></span>
+<span class="line"><span style="color:#E1E4E8">}) {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> params</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> props.params;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">locale</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> params;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">children</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> props;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> cookieStore</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> cookies</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> appTheme</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> cookieStore.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'appTheme'</span><span style="color:#E1E4E8">)?.value </span><span style="color:#F97583">??</span><span style="color:#9ECBFF"> 'system'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> messages</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> getMessages</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">html</span><span style="color:#B392F0"> lang</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{locale} </span><span style="color:#B392F0">className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"h-full"</span><span style="color:#B392F0"> data-mode</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{appTheme}></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">body</span></span>
+<span class="line"><span style="color:#B392F0">        className</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">`dark:bg-neutral-950 h-full ${</span><span style="color:#E1E4E8">inter</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">className</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#E1E4E8">      ></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#79B8FF">ThemeProvider</span></span>
+<span class="line"><span style="color:#B392F0">          attribute</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"class"</span></span>
+<span class="line"><span style="color:#B392F0">          defaultTheme</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"system"</span></span>
+<span class="line"><span style="color:#B392F0">          enableSystem</span></span>
+<span class="line"><span style="color:#B392F0">          disableTransitionOnChange</span></span>
+<span class="line"><span style="color:#E1E4E8">        ></span></span>
+<span class="line"><span style="color:#E1E4E8">          &#x3C;</span><span style="color:#79B8FF">NextIntlClientProvider</span><span style="color:#B392F0"> locale</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{locale} </span><span style="color:#B392F0">messages</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{messages}></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;</span><span style="color:#79B8FF">AppAbilityProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">              &#x3C;</span><span style="color:#79B8FF">ProvidersForUi</span><span style="color:#B392F0"> locale</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{locale}></span></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#79B8FF">ToastProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                  &#x3C;</span><span style="color:#79B8FF">ApolloProviderMain</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                    &#x3C;</span><span style="color:#79B8FF">AnalyticsProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                      &#x3C;</span><span style="color:#79B8FF">ModalProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                        &#x3C;</span><span style="color:#79B8FF">DrawerProvider</span><span style="color:#E1E4E8">>{children}&#x3C;/</span><span style="color:#79B8FF">DrawerProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                      &#x3C;/</span><span style="color:#79B8FF">ModalProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                    &#x3C;/</span><span style="color:#79B8FF">AnalyticsProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                  &#x3C;/</span><span style="color:#79B8FF">ApolloProviderMain</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;/</span><span style="color:#79B8FF">ToastProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">              &#x3C;/</span><span style="color:#79B8FF">ProvidersForUi</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;/</span><span style="color:#79B8FF">AppAbilityProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">          &#x3C;/</span><span style="color:#79B8FF">NextIntlClientProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#79B8FF">ThemeProvider</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">body</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">html</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h3 id="benefits-of-this-approach">Benefits of This Approach</h3>
+<ul>
+<li><strong>Default Theme Respects System Preferences</strong>: Ensures users who haven’t explicitly set a theme still get an accurate representation of their OS preference.</li>
+<li><strong>Better Cookie Handling</strong>: Falls back to <code>'system'</code> instead of defaulting to <code>'light'</code>.</li>
+<li><strong>Seamless Theme Switching</strong>: The <code>ThemeProvider</code> handles dynamic updates automatically.</li>
+</ul>
+<h2 id="improving-the-themetoggler-component">Improving the <code>ThemeToggler</code> Component</h2>
+<p>The <code>ThemeToggler</code> component enables users to switch between <code>light</code>, <code>dark</code>, and <code>system</code> themes. However, the standard implementation may not reflect the actual applied theme when <code>system</code> mode is selected.</p>
+<h3 id="using-resolvedtheme">Using <code>resolvedTheme</code></h3>
+<p>Instead of relying on <code>theme</code>, use <code>resolvedTheme</code> to determine the actual applied theme:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#9ECBFF">'use client'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { cn } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@/lib/utils'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { useTranslations } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'next-intl'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { useTheme } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'next-themes'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tabs, TabsList, TabsTrigger } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '../ui/tabs'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#B392F0"> ThemeToggler</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> t</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> useTranslations</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'common'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">setTheme</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">resolvedTheme</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">theme</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useTheme</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> triggerClassName</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> cn</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">    'flex-1 text-center rounded-[10px] font-medium'</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#79B8FF">Tabs</span><span style="color:#B392F0"> defaultValue</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{theme} </span><span style="color:#B392F0">className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"mb-2"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#79B8FF">TabsList</span><span style="color:#B392F0"> className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"flex flex-row w-full gap-1 rounded-[12px] p-0.5 h-auto"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#79B8FF">TabsTrigger</span></span>
+<span class="line"><span style="color:#B392F0">          className</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{triggerClassName}</span></span>
+<span class="line"><span style="color:#B392F0">          value</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"light"</span></span>
+<span class="line"><span style="color:#B392F0">          onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{() </span><span style="color:#F97583">=></span><span style="color:#B392F0"> setTheme</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'light'</span><span style="color:#E1E4E8">)}</span></span>
+<span class="line"><span style="color:#E1E4E8">        ></span></span>
+<span class="line"><span style="color:#E1E4E8">          {</span><span style="color:#B392F0">t</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'nav-item-label-light-mode'</span><span style="color:#E1E4E8">)}</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#79B8FF">TabsTrigger</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#79B8FF">TabsTrigger</span></span>
+<span class="line"><span style="color:#B392F0">          className</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{triggerClassName}</span></span>
+<span class="line"><span style="color:#B392F0">          value</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"dark"</span></span>
+<span class="line"><span style="color:#B392F0">          onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{() </span><span style="color:#F97583">=></span><span style="color:#B392F0"> setTheme</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'dark'</span><span style="color:#E1E4E8">)}</span></span>
+<span class="line"><span style="color:#E1E4E8">        ></span></span>
+<span class="line"><span style="color:#E1E4E8">          {</span><span style="color:#B392F0">t</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'nav-item-label-dark-mode'</span><span style="color:#E1E4E8">)}</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#79B8FF">TabsTrigger</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#79B8FF">TabsTrigger</span></span>
+<span class="line"><span style="color:#B392F0">          className</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{triggerClassName}</span></span>
+<span class="line"><span style="color:#B392F0">          value</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"system"</span></span>
+<span class="line"><span style="color:#B392F0">          onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{() </span><span style="color:#F97583">=></span><span style="color:#B392F0"> setTheme</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'system'</span><span style="color:#E1E4E8">)}</span></span>
+<span class="line"><span style="color:#E1E4E8">        ></span></span>
+<span class="line"><span style="color:#E1E4E8">          {</span><span style="color:#B392F0">t</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'nav-item-label-system-mode'</span><span style="color:#E1E4E8">)}</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#79B8FF">TabsTrigger</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#79B8FF">TabsList</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#79B8FF">Tabs</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<h3 id="why-resolvedtheme">Why <code>resolvedTheme</code>?</h3>
+<ul>
+<li><code>theme</code> returns <code>'system'</code> if set, but <code>resolvedTheme</code> returns <code>'light'</code> or <code>'dark'</code> based on the actual applied theme.</li>
+<li>Ensures UI accurately reflects the active theme when following system settings.</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<h3 id="key-fixes-implemented">Key Fixes Implemented</h3>
+<ol>
+<li><strong>Default Theme Handling</strong>:
+<ul>
+<li>Now correctly defaults to <code>'system'</code>, allowing OS preferences to dictate the theme.</li>
+</ul>
+</li>
+<li><strong>Using <code>resolvedTheme</code> in <code>ThemeToggler</code></strong>:
+<ul>
+<li>Provides accurate feedback when <code>system</code> mode is enabled.</li>
+</ul>
+</li>
+<li><strong>Adding a ‘System’ Option to <code>ThemeToggler</code></strong>:
+<ul>
+<li>Allows users to explicitly select system-based theming.</li>
+</ul>
+</li>
+</ol>
+<h3 id="benefits">Benefits</h3>
+<ul>
+<li>Ensures a seamless and accurate theme-switching experience.</li>
+<li>Better respects user preferences across devices.</li>
+<li>Improves clarity and maintainability of theme-related code.</li>
+</ul>
+<p>By implementing these improvements, your Next.js project will have a more intuitive and reliable theme-switching experience! 🚀</p> </main> <div class="flex flex-wrap flex-col mb-12"> <h2 class="mb-4">Topics:</h2> <div class="flex gap-2"> <a href="/blog/topics/nextjs">nextjs</a><a href="/blog/topics/next-themes">next-themes</a> </div> </div> </article>  <div class="flex justify-center w-full mb-4">
+Made with ♥︎ by Irina Korotkaya
+</div> </body></html>
