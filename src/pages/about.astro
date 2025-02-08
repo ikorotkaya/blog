@@ -1,23 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Globe, Linkedin, Github, Mail } from 'lucide-astro';
 
 const title = 'About me';
 const description = 'Some info about myself';
 
 const contactOptions = [
   {
+    link: 'https://korotkaya.com/',
+    icon: Globe,
+    alt: 'Website'
+  },
+  {
     link: 'https://www.linkedin.com/in/irinakorotkaya/',
-    icon: '/blog/linkedin.webp',
+    icon: Linkedin,
     alt: 'LinkedIn'
   },
   {
     link: 'https://github.com/ikorotkaya',
-    icon: '/blog/github.webp',
+    icon: Github,
     alt: 'GitHub'
   },
   {
     link: 'mailto:irina@korotkaya.com',
-    icon: '/blog/gmail.webp',
+    icon: Mail,
     alt: 'Gmail'
   }
 ];
@@ -40,7 +46,7 @@ const contactOptions = [
       {
         contactOptions.map((option) => (
           <a href={option.link} target="_blank">
-            <img src={option.icon} alt={option.alt} class="h-4" />
+            <option.icon class="hover:text-smalt transition-colors" />
           </a>
         ))
       }
