@@ -8,7 +8,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write . --plugin=prettier-plugin-astro"
+    "format": "prettier --write . --plugin=prettier-plugin-astro",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.12",
     "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.13.0"
+    "prettier-plugin-astro": "^0.13.0",
+    "husky": "^8.0.0"
   }
 }
