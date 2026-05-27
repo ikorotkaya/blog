@@ -12,7 +12,11 @@ const description = 'Astro Base Layout example.';
 
 <BaseLayout title={title} description={description}>
   <div class="flex-grow">
-    <h2>{title}:</h2>
+    <p
+      class="not-prose text-[11px] tracking-[0.15em] uppercase text-muted mb-4 mt-0"
+    >
+      {title}
+    </p>
     <div class="flex flex-wrap gap-2 flex-row">
       {tags.map((tag) => <Tag key={tag} tag={tag} />)}
     </div>

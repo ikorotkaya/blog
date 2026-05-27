@@ -31,22 +31,27 @@ const contactOptions = [
 
 <BaseLayout title={title} description={description}>
   <div class="mb-12 flex-grow">
-    <h2>{title}</h2>
-    <div class="flex items-center justify-center gap-12">
-      <p class="mt-0">
-        I'm Irina. I'm a Full Stack Engineer with a background in
-        Design and Architecture, based in Berlin. Currently the
-        Software Engineer at <a
-          href="https://www.liqid.de"
-          class="no-underline text-smalt hover:text-neutral">LIQID</a
-        >.
-      </p>
-    </div>
-    <div class="not-prose flex gap-4 items-center mt-3">
+    <p
+      class="not-prose text-[11px] tracking-[0.15em] uppercase text-muted mb-4 mt-0"
+    >
+      {title}
+    </p>
+    <p class="mt-0">
+      I'm Irina. Sensitive to beauty and detail, occasionally
+      overwhelmed by both. Spent years designing buildings, now I
+      write code. Based in Berlin.
+    </p>
+    <div class="not-prose flex gap-3 items-center mt-4">
       {
         contactOptions.map((option) => (
-          <a href={option.link} target="_blank">
-            <option.icon class="hover:text-smalt transition-colors" />
+          <a
+            href={option.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={option.alt}
+            class="text-muted hover:text-sage transition-colors"
+          >
+            <option.icon size={18} aria-hidden="true" />
           </a>
         ))
       }

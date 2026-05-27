@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Handling unexpected queries in database migrations'
-pubDate: '2024 05 13'
+pubDate: '2024-05-13'
 tags: ['backend', 'database', 'migration', 'typeorm']
 ---
 

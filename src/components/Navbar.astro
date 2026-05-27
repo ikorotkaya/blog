@@ -6,10 +6,13 @@ const links = [
 ];
 ---
 
-<div class="flex flex-row gap-4">
+<div class="flex flex-row gap-8">
   {
     links.map((link) => (
-      <a href={link.href} class="hover:text-smalt no-underline">
+      <a
+        href={link.href}
+        class="hover:text-sage no-underline text-[11px] tracking-[0.15em] uppercase text-muted transition-colors"
+      >
         {link.label}
       </a>
     ))

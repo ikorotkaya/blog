@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'DTOs, entities, frontend and backend connections'
-pubDate: '2024 06 23'
+pubDate: '2024-06-23'
 tags:
   ['dto', 'apollo', 'entity', 'codegen', 'migration', 'query', 'view']
 ---

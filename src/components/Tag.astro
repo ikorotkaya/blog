@@ -2,6 +2,9 @@
 const { tag } = Astro.props;
 ---
 
-<>
-  <a href={`/blog/topics/${tag}`}>{tag}</a>
-</>
+<a
+  href={`/blog/topics/${tag}`}
+  class="no-underline inline-block text-neutral text-[10px] tracking-[0.08em] uppercase bg-sage/10 border border-sage/25 rounded-full px-3 py-0.5 hover:bg-sage/20 transition-colors"
+>
+  {tag}
+</a>

@@ -1,9 +1,19 @@
 ---
-const { title, url } = Astro.props;
+import { format } from 'date-fns';
+
+const { title, url, pubDate } = Astro.props;
+const date = format(new Date(pubDate), 'yyyy-MM-dd');
 ---
 
-<li>
-  <a href={url} class="no-underline">
+<div class="flex items-baseline gap-8 py-1">
+  <time
+    class="text-muted text-[11px] tracking-[0.08em] uppercase w-24 shrink-0"
+    datetime={pubDate}>{date}</time
+  >
+  <a
+    href={url}
+    class="no-underline hover:text-sage transition-colors"
+  >
     {title}
   </a>
-</li>
+</div>

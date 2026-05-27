@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Deploying astro to GitHub Pages'
-pubDate: '2024 05 01'
+pubDate: '2024-05-01'
 tags: ['astro', 'blog', 'github-pages', 'deployment', 'static-site']
 ---
 

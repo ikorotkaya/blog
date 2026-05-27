@@ -19,6 +19,24 @@ const { description, title }: Props = Astro.props;
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap"
+      />
+    </noscript>
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -41,12 +59,14 @@ const { description, title }: Props = Astro.props;
     <meta name="description" content={description} />
   </head>
   <body
-    class="prose prose-stone mx-auto max-w-[700px] min-h-screen flex flex-col"
+    class="prose prose-stone bg-canvas mx-auto max-w-[680px] px-6 min-h-screen flex flex-col"
   >
     <div class="border-b border-tapa-100 mb-8">
       <Header />
     </div>
-    <slot />
+    <main class="flex flex-col flex-grow">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>

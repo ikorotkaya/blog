@@ -13,22 +13,23 @@ const { frontmatter, description, title } = Astro.props;
 
 <BaseLayout description={description} title={title}>
   <article class="flex flex-col max-w-full flex-grow">
-    <header>
-      <h1>{frontmatter.title}</h1>
-      <p>{formatDate(frontmatter.pubDate)}</p>
+    <header class="mb-8">
+      <p
+        class="text-[11px] tracking-[0.12em] uppercase text-muted mt-0 mb-5"
+      >
+        {formatDate(frontmatter.pubDate)}
+      </p>
+      <h1 class="mt-0">{frontmatter.title}</h1>
     </header>
     <main>
       <slot />
     </main>
-    <div class="flex flex-wrap flex-col mb-12">
-      <h2 class="mb-4">Topics:</h2>
-      <div class="flex gap-2">
-        {
-          frontmatter.tags.map((tag: string) => (
-            <Tag key={tag} tag={tag} />
-          ))
-        }
-      </div>
+    <div class="not-prose flex flex-wrap gap-2 mt-12 mb-12">
+      {
+        frontmatter.tags.map((tag: string) => (
+          <Tag key={tag} tag={tag} />
+        ))
+      }
     </div>
   </article>
 </BaseLayout>

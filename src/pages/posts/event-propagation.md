@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Event propagation in JavaScript'
-pubDate: '2024 04 14'
+pubDate: '2024-04-14'
 tags: ['frontend', 'HTML', 'DOM', 'event']
 ---
 

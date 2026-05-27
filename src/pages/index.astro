@@ -1,16 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogPost from '../components/BlogPost.astro';
+import { format } from 'date-fns';
 
-const title = "Irina's Blog";
-const description =
-  "Irina's Blog is a place where she shares her thoughts.";
+const title = "Irina's Notes";
+const description = 'Software engineering notes by Irina Korotkaya.';
+
+const allPosts = await Astro.glob('./posts/*.md');
+const recentPosts = allPosts
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.pubDate).getTime() -
+      new Date(a.frontmatter.pubDate).getTime()
+  )
+  .slice(0, 3);
 ---
 
 <BaseLayout description={description} title={title}>
-  <div class="flex flex-col flex-grow">
-    <h2>
-      Hi there! Here you can find my writings through my Software
-      Engineering journey.
-    </h2>
+  <div class="flex flex-col flex-grow gap-10">
+    <p class="text-muted mt-0 leading-relaxed not-prose text-sm">
+      Software engineering notes —<br />
+      things I've built, learned, or gotten wrong.
+    </p>
+    <div class="not-prose flex flex-col">
+      <span
+        class="text-[11px] tracking-[0.15em] uppercase text-muted mb-4"
+        >Recent</span
+      >
+      {
+        recentPosts.map((post) => (
+          <BlogPost
+            url={post.url}
+            title={post.frontmatter.title}
+            pubDate={post.frontmatter.pubDate}
+          />
+        ))
+      }
+      <a
+        href="/blog/posts/"
+        class="mt-4 text-[11px] tracking-[0.12em] uppercase text-muted hover:text-sage transition-colors no-underline"
+        >All posts →</a
+      >
+    </div>
   </div>
 </BaseLayout>

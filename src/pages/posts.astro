@@ -9,8 +9,12 @@ const description = 'Posts on software development journey.';
 
 <BaseLayout title={title} description={description}>
   <div class="flex-grow">
-    <h2>{title}:</h2>
-    <ul>
+    <p
+      class="not-prose text-[11px] tracking-[0.15em] uppercase text-muted mb-4 mt-0"
+    >
+      {title}
+    </p>
+    <div class="not-prose flex flex-col">
       {
         allPosts
           .sort(
@@ -19,9 +23,13 @@ const description = 'Posts on software development journey.';
               new Date(a.frontmatter.pubDate).getTime()
           )
           .map((post) => (
-            <BlogPost url={post.url} title={post.frontmatter.title} />
+            <BlogPost
+              url={post.url}
+              title={post.frontmatter.title}
+              pubDate={post.frontmatter.pubDate}
+            />
           ))
       }
-    </ul>
+    </div>
   </div>
 </BaseLayout>
